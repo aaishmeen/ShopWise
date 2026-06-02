@@ -1,3 +1,20 @@
+import json
+import os
+from datetime import datetime
+
+FILE_PATH= "search_history.json"
+
+def load_history():
+    
+    if not os.path.exists(FILE_PATH):
+        return []
+    
+    with open (FILE_PATH,"r") as file:
+        return json.load(file)
+
+def save_history():
+    pass
+
 def search_product():
     pass
 
@@ -8,6 +25,8 @@ def menu():
     print("1. Search Product ")
     print("2. View History ")
     print("3. Exit ")
+
+search_history = load_history()
 
 while True:
     print ( '-' * 35 )
