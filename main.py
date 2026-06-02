@@ -13,7 +13,8 @@ def load_history():
         return json.load(file)
 
 def save_history():
-    pass
+    with open(FILE_PATH,"w") as file:
+        json.dump(search_history,file,indent=4)
 
 def search_product():
     pass
