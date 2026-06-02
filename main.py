@@ -2,7 +2,10 @@ import json
 import os
 from datetime import datetime
 
-FILE_PATH= "search_history.json"
+FILE_PATH= os.path.join(
+    os.path.dirname(__file__),
+    "search_history.json"
+)
 
 def load_history():
     
@@ -17,7 +20,26 @@ def save_history():
         json.dump(search_history,file,indent=4)
 
 def search_product():
-    pass
+
+    product_name = input("Enter Product Name: ")
+
+    current_time = datetime.now()
+
+    date = current_time.strftime("%Y-%m-%d")
+    time =  current_time.strftime("%H:%M:%S")
+
+    search = {
+        "product_name": product_name,
+        "date": date,
+        "time":time
+    }
+
+    search_history.append(search)
+
+    save_history()
+
+    print("Search saved successfully!")
+
 
 def view_history():
     pass
