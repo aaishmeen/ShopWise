@@ -42,7 +42,26 @@ def search_product():
 
 
 def view_history():
-    pass
+
+    if not search_history :
+        print("No Search history Found !")
+        return
+
+       
+    print('-' * 65)
+    print(f"{'No.':<5} {'Product Name':<25} {'Date':<15} {'Time':<10}")
+    print('-' * 65)
+
+    for index , search in enumerate(search_history,start=1):
+        print(
+            f"{index:<5}"
+            f"{search['product_name']:<25}"
+            f"{search['date']:<15}"
+            f"{search['time']:<10}" 
+                )
+        
+    print("-" * 65)    
+
 
 def menu():
     print("1. Search Product ")
