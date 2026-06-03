@@ -19,10 +19,17 @@ def save_history():
     with open(FILE_PATH,"w") as file:
         json.dump(search_history,file,indent=4)
 
+def pause():
+    input("\nPress Enter To Continue......")
+
 def search_product():
+    
+    product_name = input("Enter Product Name: ").strip()
 
-    product_name = input("Enter Product Name: ")
-
+    if not product_name:
+       print("Product name cannot be empty! ")
+       return
+    
     current_time = datetime.now()
 
     date = current_time.strftime("%Y-%m-%d")
@@ -39,12 +46,14 @@ def search_product():
     save_history()
 
     print("Search saved successfully!")
+    pause()
 
 
 def view_history():
 
     if not search_history :
         print("No Search history Found !")
+        pause()
         return
 
        
@@ -61,6 +70,7 @@ def view_history():
                 )
         
     print("-" * 65)    
+    pause()
 
 
 def menu():
