@@ -1,3 +1,4 @@
+import requests
 import json
 import os
 from datetime import datetime
@@ -27,15 +28,45 @@ def pause():
     input("\nPress Enter To Continue......")
     clear_screen()
 
+def get_products(product_name):
+
+    url = f"https://dummyjson.com/products/search?q={product_name}"
+
+    response =  requests.get(url)
+
+    data = response.json()
+
+    return data 
+
+
+
 def search_product():
     
     product_name = input("Enter Product Name: ").strip()
 
     if not product_name:
-       print("Product name cannot be empty! ")
-       pause()
-       return
+      print("Product name cannot be empty!")
+      pause()
+      return 
     
+    data = get_products(product_name)
+
+    products = data["products"]
+
+    if not products:
+        print("No products found.")
+        pause()
+        return
+
+    print(f"\nProducts Found: {len(products)}")
+    print("-" * 50)
+
+    for index, product in enumerate(products, start=1):
+        print(f"{index}. {product['title']}")
+        print(f"   Brand : {product['category']}")
+        print(f"   Price : ${product['price']}")
+        print("-" * 50)
+
     current_time = datetime.now()
 
     date = current_time.strftime("%Y-%m-%d")
@@ -170,6 +201,7 @@ while True:
 
         case _:
             print("Kindly Enter a Valid Choice") 
+            pause()
             
 
 

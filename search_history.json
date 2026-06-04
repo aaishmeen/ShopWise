@@ -1,1 +1,37 @@
-[]
+[
+    {
+        "product_name": "iphone",
+        "date": "2026-06-05",
+        "time": "00:02:10"
+    },
+    {
+        "product_name": "iphone 16",
+        "date": "2026-06-05",
+        "time": "00:02:34"
+    },
+    {
+        "product_name": "iphone 13",
+        "date": "2026-06-05",
+        "time": "00:02:50"
+    },
+    {
+        "product_name": "iphone",
+        "date": "2026-06-05",
+        "time": "00:07:20"
+    },
+    {
+        "product_name": "iphone",
+        "date": "2026-06-05",
+        "time": "00:07:42"
+    },
+    {
+        "product_name": "iphone",
+        "date": "2026-06-05",
+        "time": "00:08:40"
+    },
+    {
+        "product_name": "iphone",
+        "date": "2026-06-05",
+        "time": "00:12:40"
+    }
+]
