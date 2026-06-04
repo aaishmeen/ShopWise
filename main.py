@@ -7,6 +7,10 @@ FILE_PATH= os.path.join(
     "search_history.json"
 )
 
+def clear_screen():
+    os.system("cls")
+
+
 def load_history():
     
     if not os.path.exists(FILE_PATH):
@@ -21,6 +25,7 @@ def save_history():
 
 def pause():
     input("\nPress Enter To Continue......")
+    clear_screen()
 
 def search_product():
     
@@ -135,6 +140,7 @@ def menu():
 search_history = load_history()
 
 while True:
+
     print ( '-' * 35 )
     print("Welcome to ShopWise!")
     print ( '-' * 35 )
