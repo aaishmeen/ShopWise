@@ -32,6 +32,38 @@ def search_product():
         print(f"   Price : ${product['price']}")
         print("-" * 50)
 
+    try : 
+        selection = int(input("Select a product number for detailed information : "))    
+  
+    except ValueError:
+        print("Please enter a valid number !")
+        pause()
+        return 
+    
+    if selection < 1 or selection > len(products):
+        print("Invalid product number.")
+        pause()
+        return
+    
+    selected_product = products[selection -1]
+
+    print("\n" + "-" * 50)
+    print("PRODUCT DETAILS")
+    print("-" * 50)
+
+    print(f"Title       : {selected_product['title']}")
+    print(f"Category    : {selected_product['category']}")
+    print(f"Price       : ${selected_product['price']}")
+    print(f"Rating      : {selected_product.get('rating','N/A')}")
+    print(f"Stock       : {selected_product.get('stock','N/A')}")
+
+    print("\nDescription:")
+    print("-" * 50)
+    print(selected_product['description'])
+
+    print("-" * 50)
+
+
     current_time = datetime.now()
 
     date = current_time.strftime("%Y-%m-%d")
