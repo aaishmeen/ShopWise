@@ -54,10 +54,10 @@ ShopWise/
 * [x] Modular Project Structure
 * [x] Product Details View
 * [x] Product Selection Menu
+* [x] Save Favorite Products
 
 ### Next
 
-* [ ] Save Favorite Products
 * [ ] SQLite Integration
 
 ### Future Vision
