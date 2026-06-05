@@ -1,44 +1,7 @@
-import requests
-import json
-import os
+from utils import pause
+from api_handler import get_products
+from storage import load_history, save_history
 from datetime import datetime
-
-FILE_PATH= os.path.join(
-    os.path.dirname(__file__),
-    "search_history.json"
-)
-
-def clear_screen():
-    os.system("cls")
-
-
-def load_history():
-    
-    if not os.path.exists(FILE_PATH):
-        return []
-    
-    with open (FILE_PATH,"r") as file:
-        return json.load(file)
-
-def save_history():
-    with open(FILE_PATH,"w") as file:
-        json.dump(search_history,file,indent=4)
-
-def pause():
-    input("\nPress Enter To Continue......")
-    clear_screen()
-
-def get_products(product_name):
-
-    url = f"https://dummyjson.com/products/search?q={product_name}"
-
-    response =  requests.get(url)
-
-    data = response.json()
-
-    return data 
-
-
 
 def search_product():
     
@@ -60,10 +23,12 @@ def search_product():
 
     print(f"\nProducts Found: {len(products)}")
     print("-" * 50)
+    print(f"\nSearch Results for: {product_name}")
+    print("-" * 50)
 
     for index, product in enumerate(products, start=1):
         print(f"{index}. {product['title']}")
-        print(f"   Brand : {product['category']}")
+        print(f"   Category : {product['category']}")
         print(f"   Price : ${product['price']}")
         print("-" * 50)
 
@@ -80,7 +45,7 @@ def search_product():
 
     search_history.append(search)
 
-    save_history()
+    save_history(search_history)
 
     print("Search saved successfully!")
     pause()
@@ -138,7 +103,7 @@ def delete_search_history():
 
     search_history.pop(delete_index - 1 )
 
-    save_history()
+    save_history(search_history)
     
     print("Search History Deleted Successfully!")
     pause()
@@ -153,7 +118,7 @@ def clear_search_history():
 
     if confirm_del == 'y':
         search_history.clear()
-        save_history()
+        save_history(search_history)
         print("Search History Cleared Successfully !")
 
     else:
