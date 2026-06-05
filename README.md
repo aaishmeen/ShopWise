@@ -52,11 +52,11 @@ ShopWise/
 * [x] JSON Persistence
 * [x] API Error Handling
 * [x] Modular Project Structure
+* [x] Product Details View
+* [x] Product Selection Menu
 
 ### Next
 
-* [ ] Product Details View
-* [ ] Product Selection Menu
 * [ ] Save Favorite Products
 * [ ] SQLite Integration
 

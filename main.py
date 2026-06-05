@@ -1,6 +1,9 @@
 from utils import pause
 from api_handler import get_products
-from storage import load_history, save_history
+from storage import (load_history, 
+                     save_history, 
+                     load_favorites, 
+                     save_favorites)
 from datetime import datetime
 
 def search_product():
@@ -63,6 +66,31 @@ def search_product():
 
     print("-" * 50)
 
+    save_favorite = input("\nSave this product to favorites? (y/n): ").lower()
+
+    if save_favorite == "y":
+
+        for favorite in favorites:
+
+            if favorite["title"] == selected_product["title"]:
+                print("Product already exists in favorites.")
+                pause()
+                return
+
+        favorite = {
+        "title": selected_product["title"],
+        "category": selected_product["category"],
+        "price": selected_product["price"]
+        }
+
+        favorites.append(favorite)
+
+        save_favorites(favorites)
+
+        print("Product added to favorites.")  
+
+
+
 
     current_time = datetime.now()
 
@@ -105,6 +133,25 @@ def view_history():
         
     print("-" * 65)    
     pause()
+
+def view_favorites():
+   
+    if not favorites:
+        print("No favorites found.")
+        pause()
+        return
+
+    print("-" * 50)
+
+    for index, favorite in enumerate(favorites, start=1):
+
+        print(f"{index}. {favorite['title']}")
+        print(f"   Category : {favorite['category']}")
+        print(f"   Price    : ${favorite['price']}")
+        print("-" * 50)
+
+    pause()
+
 
 def delete_search_history():
 
@@ -161,11 +208,13 @@ def clear_search_history():
 def menu():
     print("1. Search Product ")
     print("2. View History ")
-    print("3. Delete Search History ")
-    print("4. Clear Search History ")
-    print("5. Exit ")
+    print("3.View Favorites")
+    print("4. Delete Search History ")
+    print("5. Clear Search History ")
+    print("6. Exit ")
 
 search_history = load_history()
+favorites = load_favorites()
 
 while True:
 
@@ -175,7 +224,7 @@ while True:
 
     menu()
     
-    choice = input("Enter your Choice (1-5) : ")
+    choice = input("Enter your Choice (1-6) : ")
     
     match choice :
         
@@ -186,12 +235,15 @@ while True:
             view_history()
 
         case "3":
-            delete_search_history()  
+            view_favorites()    
 
         case "4":
+            delete_search_history()  
+
+        case "5":
             clear_search_history()    
 
-        case "5" :
+        case "6" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       
