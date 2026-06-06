@@ -1,6 +1,6 @@
 # ShopWise
 
-ShopWise is a Python-based shopping assistant that helps users search for products, view product information, and maintain a history of previous searches.
+ShopWise is a Python-based shopping assistant that helps users search for products, view detailed product information, save favorite products, and maintain a history of previous searches.
 
 The long-term goal is to evolve ShopWise from a CLI application into a full-stack web platform for product discovery, price comparison, review analysis, and smarter buying decisions.
 
@@ -8,7 +8,9 @@ The long-term goal is to evolve ShopWise from a CLI application into a full-stac
 
 * Search products using a product name
 * Fetch product data from an external API
-* Display product name, category, and price
+* View detailed product information
+* Save favorite products using SQLite
+* View saved favorite products
 * Save search history automatically
 * View search history
 * Delete individual search records
@@ -21,6 +23,7 @@ The long-term goal is to evolve ShopWise from a CLI application into a full-stac
 * Lists & Dictionaries
 * File Handling
 * JSON Storage
+* SQLite Databases
 * API Integration
 * HTTP Requests (`requests`)
 * Exception Handling
@@ -35,10 +38,13 @@ ShopWise/
 │
 ├── main.py
 ├── api_handler.py
+├── database.py
 ├── storage.py
 ├── utils.py
+├── shopwise.db
 ├── search_history.json
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ## Roadmap
@@ -47,28 +53,36 @@ ShopWise/
 
 * [x] Product Search
 * [x] API Integration
+* [x] Product Details View
+* [x] Product Selection Menu
 * [x] Search History Tracking
 * [x] Search History Management
 * [x] JSON Persistence
 * [x] API Error Handling
 * [x] Modular Project Structure
-* [x] Product Details View
-* [x] Product Selection Menu
-* [x] Save Favorite Products
 * [x] SQLite Integration
+* [x] Favorites System
 * [x] Favorites Persistence
 
 ### Next
 
+* [ ] Delete Favorite Product
+* [ ] Search History Migration to SQLite
+* [ ] Product Rating Analysis
+* [ ] Review-Based Recommendations
+
+### Future Vision
+
 * [ ] Price Comparison
 * [ ] Price History Tracking
-* [ ] Review Analysis
+* [ ] Review Scraping & Analysis
 * [ ] Buy/Wait Recommendations
 * [ ] FastAPI Backend
-* [ ] Web Dashboard
+* [ ] PostgreSQL Migration
 * [ ] User Accounts
+* [ ] Web Dashboard
 * [ ] Full-Stack Web Application
 
 ## Current Version
 
-**v0.1** — Product search application with API integration, search history management, JSON persistence, and modular project architecture.
+**v0.2** — Product search application with API integration, SQLite-powered favorites system, search history management, and modular project architecture.
