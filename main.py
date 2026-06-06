@@ -145,7 +145,40 @@ def view_favorites():
 
     pause()
 
+def remove_favorite():
 
+    favorites = get_favorites()
+
+    if not favorites:
+        print("No favorites found.")
+        pause()
+        return
+
+    print("-" * 50)
+
+    for favorite in favorites:
+
+        print(f"{favorite[0]}. {favorite[1]}")
+        print(f"   Category : {favorite[2]}")
+        print(f"   Price    : ${favorite[3]}")
+        print("-" * 50)
+
+    try:
+        favorite_id = int(
+            input("Enter favorite ID to delete: ")
+        )
+
+    except ValueError:
+        print("Invalid input.")
+        pause()
+        return
+
+    delete_favorite(favorite_id)
+
+    print("Favorite deleted successfully!")
+
+    pause()
+    
 def delete_search_history():
 
     if not search_history:
@@ -201,10 +234,11 @@ def clear_search_history():
 def menu():
     print("1. Search Product ")
     print("2. View History ")
-    print("3.View Favorites")
-    print("4. Delete Search History ")
-    print("5. Clear Search History ")
-    print("6. Exit ")
+    print("3. View Favorites")
+    print("4. Delete Favorites")
+    print("5. Delete Search History ")
+    print("6. Clear Search History ")
+    print("7. Exit ")
 
 create_tables()
 
@@ -218,7 +252,7 @@ while True:
 
     menu()
     
-    choice = input("Enter your Choice (1-6) : ")
+    choice = input("Enter your Choice (1-7) : ")
     
     match choice :
         
@@ -229,15 +263,18 @@ while True:
             view_history()
 
         case "3":
-            view_favorites()    
+            view_favorites() 
 
         case "4":
-            delete_search_history()  
+            remove_favorite()       
 
         case "5":
+            delete_search_history()  
+
+        case "6":
             clear_search_history()    
             
-        case "6" :
+        case "7" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       
