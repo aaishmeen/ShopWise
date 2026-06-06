@@ -22,19 +22,3 @@ def load_history():
 def save_history(search_history):
     with open(FILE_PATH,"w") as file:
         json.dump(search_history,file,indent=4)
-
-def load_favorites():
-
-    if not os.path.exists(FAVORITES_FILE):
-        return []
-
-    try:
-        with open(FAVORITES_FILE, "r") as file:
-            return json.load(file)
-
-    except json.JSONDecodeError:
-        return []
-
-def save_favorites(favorites):
-    with open(FAVORITES_FILE, "w") as file:
-        json.dump(favorites, file, indent=4)

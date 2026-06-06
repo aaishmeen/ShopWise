@@ -55,12 +55,10 @@ ShopWise/
 * [x] Product Details View
 * [x] Product Selection Menu
 * [x] Save Favorite Products
+* [x] SQLite Integration
+* [x] Favorites Persistence
 
 ### Next
-
-* [ ] SQLite Integration
-
-### Future Vision
 
 * [ ] Price Comparison
 * [ ] Price History Tracking

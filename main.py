@@ -1,10 +1,14 @@
 from utils import pause
 from api_handler import get_products
+from database import (create_tables,
+                      add_favorite,
+                      get_favorites,
+                      delete_favorite
+                      )
 from storage import (load_history, 
-                     save_history, 
-                     load_favorites, 
-                     save_favorites)
+                    save_history)
 from datetime import datetime
+
 
 def search_product():
     
@@ -70,26 +74,13 @@ def search_product():
 
     if save_favorite == "y":
 
-        for favorite in favorites:
-
-            if favorite["title"] == selected_product["title"]:
-                print("Product already exists in favorites.")
-                pause()
-                return
-
-        favorite = {
-        "title": selected_product["title"],
-        "category": selected_product["category"],
-        "price": selected_product["price"]
-        }
-
-        favorites.append(favorite)
-
-        save_favorites(favorites)
+        add_favorite(
+        selected_product["title"],
+        selected_product["category"],
+        selected_product["price"]
+        )
 
         print("Product added to favorites.")  
-
-
 
 
     current_time = datetime.now()
@@ -136,6 +127,7 @@ def view_history():
 
 def view_favorites():
    
+    favorites= get_favorites()
     if not favorites:
         print("No favorites found.")
         pause()
@@ -143,11 +135,12 @@ def view_favorites():
 
     print("-" * 50)
 
-    for index, favorite in enumerate(favorites, start=1):
+    for favorite in favorites:
 
-        print(f"{index}. {favorite['title']}")
-        print(f"   Category : {favorite['category']}")
-        print(f"   Price    : ${favorite['price']}")
+        print(f"{favorite[0]}. {favorite[1]}")
+        print(f"   Category : {favorite[2]}")
+        print(f"   Price    : ${favorite[3]}")
+        print("-" * 50)
         print("-" * 50)
 
     pause()
@@ -213,8 +206,9 @@ def menu():
     print("5. Clear Search History ")
     print("6. Exit ")
 
+create_tables()
+
 search_history = load_history()
-favorites = load_favorites()
 
 while True:
 
@@ -242,7 +236,7 @@ while True:
 
         case "5":
             clear_search_history()    
-
+            
         case "6" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
