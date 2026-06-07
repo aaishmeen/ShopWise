@@ -11,15 +11,31 @@ from database import (create_tables,
                         )
 from datetime import datetime
 
-def get_verdict(rating,stock):
+def calculate_score(rating, stock):
 
-    if rating >= 4.5 and stock >20:
+    score = 0
+
+    # Rating contributes up to 8 points
+    score += (rating / 5) * 8
+
+    # Stock contributes up to 2 points
+    if stock > 50:
+        score += 2
+
+    elif stock > 20:
+        score += 1
+
+    return round(score, 1)
+
+def get_verdict(score):
+
+    if score >= 8 :
         return "EXCELLENT CHOICE !"
     
-    elif rating > 4.0:
+    elif score >= 6 :
         return "RECOMMENDED"
     
-    elif rating >=3.0:
+    elif score >= 4 :
         return "AVERAGE"
     
     else:
@@ -80,10 +96,13 @@ def search_product():
     print(f"Rating      : {selected_product.get('rating','N/A')}")
     print(f"Stock       : {selected_product.get('stock','N/A')}")
 
-    verdict = get_verdict(
+    score =  calculate_score(
         selected_product.get("rating", 0),
         selected_product.get("stock", 0))
+    
+    verdict = get_verdict(score)
 
+    print(f"ShopWise Score       : {score}/10")
     print(f"Verdict     : {verdict}")
 
     print("\nDescription:")
