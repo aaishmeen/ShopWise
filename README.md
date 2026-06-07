@@ -39,10 +39,8 @@ ShopWise/
 ├── main.py
 ├── api_handler.py
 ├── database.py
-├── storage.py
 ├── utils.py
 ├── shopwise.db
-├── search_history.json
 ├── README.md
 └── .gitignore
 ```
@@ -63,11 +61,11 @@ ShopWise/
 * [x] SQLite Integration
 * [x] Favorites System
 * [x] Favorites Persistence
+* [x] Delete Favorite Product
+* [x] Search History Migration to SQLite
 
 ### Next
 
-* [ ] Delete Favorite Product
-* [ ] Search History Migration to SQLite
 * [ ] Product Rating Analysis
 * [ ] Review-Based Recommendations
 

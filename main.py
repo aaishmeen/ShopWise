@@ -1,12 +1,14 @@
 from utils import pause
 from api_handler import get_products
 from database import (create_tables,
-                      add_favorite,
-                      get_favorites,
-                      delete_favorite
-                      )
-from storage import (load_history, 
-                    save_history)
+                    add_favorite,
+                    get_favorites,
+                    delete_favorite,
+                    add_search_history,
+                    get_search_history,
+                    delete_search_history,
+                    clear_search_history
+                        )
 from datetime import datetime
 
 
@@ -88,15 +90,7 @@ def search_product():
     date = current_time.strftime("%Y-%m-%d")
     time =  current_time.strftime("%H:%M:%S")
 
-    search = {
-        "product_name": product_name,
-        "date": date,
-        "time":time
-    }
-
-    search_history.append(search)
-
-    save_history(search_history)
+    add_search_history( product_name, date,time)
 
     print("Search saved successfully!")
     pause()
@@ -104,7 +98,9 @@ def search_product():
 
 def view_history():
 
-    if not search_history :
+    history = get_search_history()
+
+    if not history :
         print("No Search history Found !")
         pause()
         return
@@ -114,13 +110,14 @@ def view_history():
     print(f"{'No.':<5} {'Product Name':<25} {'Date':<15} {'Time':<10}")
     print('-' * 65)
 
-    for index , search in enumerate(search_history,start=1):
+    for search in history:
+
         print(
-            f"{index:<5}"
-            f"{search['product_name']:<25}"
-            f"{search['date']:<15}"
-            f"{search['time']:<10}" 
-                )
+            f"{search[0]:<5}"
+            f"{search[1]:<25}"
+            f"{search[2]:<15}"
+            f"{search[3]:<10}"
+        )
         
     print("-" * 65)    
     pause()
@@ -179,70 +176,71 @@ def remove_favorite():
 
     pause()
     
-def delete_search_history():
+def remove_search_history():
 
-    if not search_history:
-        print("No Search History Found !")
+    history = get_search_history()
+
+    if not history:
+        print("No Search History Found!")
         pause()
         return
-    
-    print('-' * 65)
-    print(f"{'No.':<5} {'Product Name':<25} {'Date':<15} {'Time':<10}")
-    print('-' * 65)
 
-    for index , search in enumerate(search_history,start=1):
-        print(f"{index}. {search['product_name']}")
-        
-    print("-" * 65)  
-    try :
-      delete_index= int(input("Enter Search History to Delete : "))
+    print("-" * 70)
+
+    for search in history:
+        print(f"{search[0]}. {search[1]}")
+
+    print("-" * 70)
+
+    try:
+        history_id = int(
+            input("Enter Search History ID to delete: ")
+        )
+
     except ValueError:
-        print("Invalid Input") 
+        print("Invalid Input")
         pause()
         return
 
-    if delete_index < 1 or delete_index > len(search_history):
-        print("Invalid Operation !")
-        pause()
-        return
+    delete_search_history(history_id)
 
-    search_history.pop(delete_index - 1 )
-
-    save_history(search_history)
-    
     print("Search History Deleted Successfully!")
+
     pause()
 
-def clear_search_history():
-    if not search_history:
-        print("No Search History Found !")
-        pause()
-        return 
-    
-    confirm_del = input("Are you sure you want to clear all search history? (y/n) : ").lower()
 
-    if confirm_del == 'y':
-        search_history.clear()
-        save_history(search_history)
-        print("Search History Cleared Successfully !")
+def remove_all_search_history():
+
+    history = get_search_history()
+
+    if not history:
+        print("No Search History Found!")
+        pause()
+        return
+
+    confirm_del = input("Are you sure you want to clear all search history? (y/n): ").lower()
+
+    if confirm_del == "y":
+
+        clear_search_history()
+
+        print("Search History Cleared Successfully!")
 
     else:
-        print("Operation Cancelled !")
-        
-    pause()    
+        print("Operation Cancelled!")
+
+    pause()
 
 def menu():
     print("1. Search Product ")
     print("2. View History ")
     print("3. View Favorites")
     print("4. Delete Favorites")
-    print("5. Delete Search History ")
-    print("6. Clear Search History ")
+    print("5. Remove Search History ")
+    print("6. Remove all Search History ")
     print("7. Exit ")
 
 create_tables()
-
-search_history = load_history()
 
 while True:
 
@@ -269,10 +267,10 @@ while True:
             remove_favorite()       
 
         case "5":
-            delete_search_history()  
+            remove_search_history()  
 
         case "6":
-            clear_search_history()    
+            remove_all_search_history()    
             
         case "7" :
             print("Exiting Now !")

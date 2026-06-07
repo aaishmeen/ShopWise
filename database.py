@@ -19,6 +19,15 @@ def create_tables():
     )
     """)
 
+    cursor.execute("""
+CREATE TABLE IF NOT EXISTS search_history(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_name TEXT,
+        date TEXT,
+        time TEXT
+        )
+        """)
+
     conn.commit()
     conn.close()
 
@@ -64,3 +73,55 @@ def delete_favorite(favorite_id):
     conn.commit()
     conn.close()
 
+def add_search_history(product_name,date,time):
+
+    conn =  get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO search_history
+    (product_name,date,time)
+    VALUES(?,?,?)
+    """,(product_name,date,time))
+
+    conn.commit()
+    conn.close()
+
+
+def get_search_history():
+
+    conn = get_connection()
+    cursor =  conn.cursor()
+
+    cursor.execute("""
+    SELECT * FROM search_history""")
+
+    history = cursor.fetchall()
+
+    conn.close()
+
+    return history
+
+def delete_search_history(history_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    DELETE FROM search_history
+    WHERE id =?""",(history_id,))
+
+    conn.commit()
+    conn.close()
+
+def clear_search_history():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    DELETE FROM search_history
+    """)
+
+    conn.commit()
+    conn.close()    
