@@ -7,7 +7,9 @@ from database import (create_tables,
                     add_search_history,
                     get_search_history,
                     delete_search_history,
-                    clear_search_history
+                    clear_search_history,
+                    add_price_record,
+                    get_price_history
                         )
 from datetime import datetime
 
@@ -129,6 +131,13 @@ def search_product():
     date = current_time.strftime("%Y-%m-%d")
     time =  current_time.strftime("%H:%M:%S")
 
+    add_price_record(
+    selected_product["title"],
+    selected_product["price"],
+    date,
+    time
+)
+
     add_search_history( product_name, date,time)
 
     print("Search saved successfully!")
@@ -180,6 +189,40 @@ def view_favorites():
         print("-" * 50)
 
     pause()
+
+def view_price_history():
+
+    history = get_price_history()
+
+    if not history:
+        print("No price history found.")
+        pause()
+        return    
+
+    print("-" * 75) 
+    print(
+         f"{'ID':<5}"
+        f"{'Product Name':<25}"
+        f"{'Price':<10}"
+        f"{'Date':<15}"
+        f"{'Time':<10}"
+    )      
+    print("-" * 75)
+
+    for record in history:
+
+        print(
+            f"{record[0]:<5}"
+            f"{record[1]:<25}"
+            f"${record[2]:<9}"
+            f"{record[3]:<15}"
+            f"{record[4]:<10}"
+        )
+
+    print("-" * 75)
+
+    pause()
+
 
 def remove_favorite():
 
@@ -277,7 +320,8 @@ def menu():
     print("4. Delete Favorites")
     print("5. Remove Search History ")
     print("6. Remove all Search History ")
-    print("7. Exit ")
+    print("7. View Price History")
+    print("8. Exit ")
 
 create_tables()
 
@@ -310,8 +354,11 @@ while True:
 
         case "6":
             remove_all_search_history()    
+
+        case "7":
+            view_price_history()    
             
-        case "7" :
+        case "8" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       

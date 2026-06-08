@@ -27,6 +27,13 @@ CREATE TABLE IF NOT EXISTS search_history(
         time TEXT
         )
         """)
+    
+    cursor.execute("""CREATE TABLE IF NOT EXISTS price_history(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   product_name TEXT,
+                   price REAL,
+                   date TEXT,
+                   time TEXT)""")
 
     conn.commit()
     conn.close()
@@ -125,3 +132,34 @@ def clear_search_history():
 
     conn.commit()
     conn.close()    
+
+def add_price_record(product_name,price,date,time):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO price_history
+    (product_name,price,date,time)
+    VALUES(?,?,?,?)"""
+    ,(product_name,price,date,time))
+
+    conn.commit()
+    conn.close()    
+
+
+def get_price_history():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT * FROM price_history
+    """)
+
+    history = cursor.fetchall()
+
+    conn.close()
+
+    return history    
+
