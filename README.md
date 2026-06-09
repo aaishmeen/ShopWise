@@ -187,21 +187,6 @@ Products are evaluated using:
 
 ---
 
-# Installation
-
-## Clone Repository
-
-```bash
-git clone <repository-url>
-cd ShopWise
-```
-
-## Create Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
 # Current Version
 
 ## v0.4
