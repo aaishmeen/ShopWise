@@ -1,199 +1,235 @@
 # ShopWise
 
-ShopWise is a Python-based shopping assistant that helps users search for products, view detailed product information, save favorite products, track price history, and maintain a searchable record of previous searches.
+A Python CLI shopping assistant that helps users search products, manage favorites, track price history, analyze pricing trends, and receive product recommendations.
 
-The long-term goal is to evolve ShopWise from a CLI application into a full-stack web platform for product discovery, price tracking, review analysis, and smarter buying decisions.
+Built as a learning project to master:
 
----
-
-## Features
-
-* Search products using a product name
-* Fetch product data from an external API
-* View detailed product information
-* Generate a ShopWise product score
-* Get recommendation verdicts based on product score
-* Save favorite products using SQLite
-* View saved favorite products
-* Delete favorite products
-* Save search history automatically
-* View search history
-* Delete individual search records
-* Clear all search history
-* Track product prices automatically
-* View product price history
-* Handle API request failures using exception handling
+- Python
+- APIs & HTTP Requests
+- SQLite
+- Database Design
+- Software Architecture
+- Recommendation Systems
+- Backend Development
 
 ---
 
-## Concepts Used
+# Features
 
-* Python Functions
-* Lists & Dictionaries
-* SQLite Databases
-* SQL CRUD Operations
-* Database Design
-* API Integration
-* HTTP Requests (`requests`)
-* Exception Handling
-* Date & Time Handling
-* Business Logic
-* Recommendation Systems
-* Scoring Algorithms
-* CLI Development
-* Modular Programming
-* Git & GitHub
+## Product Search
+- Search products by name
+- Fetch real-time product data from DummyJSON API
+- View detailed product information
+
+## Product Insights
+- ShopWise Score (/10)
+- Product Recommendation Verdict
+- Rating & Stock Analysis
+
+## Favorites Management
+- Save favorite products
+- View saved favorites
+- Delete favorite products
+
+## Search History
+- Automatically save searches
+- View search history
+- Delete individual search records
+- Clear all search history
+
+## Price Tracking
+- Automatically record product prices
+- Store historical price data
+- View complete price history
+
+## Price Analytics
+- Highest recorded price
+- Lowest recorded price
+- Average recorded price
+
+## Reliability
+- API error handling
+- Input validation
+- SQLite data persistence
 
 ---
 
-## Project Structure
+# Technologies Used
+
+- Python 3
+- SQLite3
+- Requests Library
+- DummyJSON API
+- Git & GitHub
+
+---
+
+# Project Structure
 
 ```text
 ShopWise/
 │
 ├── main.py
-├── api_handler.py
 ├── database.py
+├── api_handler.py
 ├── utils.py
 ├── shopwise.db
 ├── README.md
-└── .gitignore
+├── .gitignore
+│
+└── .venv/
 ```
 
 ---
 
-## Database Tables
+# Database Design
 
-### favorites
+## favorites
 
 Stores user favorite products.
 
-| Column   | Type    |
-| -------- | ------- |
-| id       | INTEGER |
-| title    | TEXT    |
-| category | TEXT    |
-| price    | REAL    |
-
-### search_history
-
-Stores product searches.
-
-| Column       | Type    |
-| ------------ | ------- |
-| id           | INTEGER |
-| product_name | TEXT    |
-| date         | TEXT    |
-| time         | TEXT    |
-
-### price_history
-
-Stores product price records over time.
-
-| Column       | Type    |
-| ------------ | ------- |
-| id           | INTEGER |
-| product_name | TEXT    |
-| price        | REAL    |
-| date         | TEXT    |
-| time         | TEXT    |
+| Column | Type |
+|----------|----------|
+| id | INTEGER |
+| title | TEXT |
+| category | TEXT |
+| price | REAL |
 
 ---
 
-## Roadmap
+## search_history
 
-### Completed
+Stores search activity.
 
-* [x] Product Search
-* [x] API Integration
-* [x] Product Details View
-* [x] Product Selection Menu
-* [x] Favorites System
-* [x] Favorites Persistence (SQLite)
-* [x] Delete Favorite Product
-* [x] Search History Tracking
-* [x] Search History Management
-* [x] Search History Migration to SQLite
-* [x] Product Scoring System
-* [x] Product Recommendation Verdicts
-* [x] Price History Tracking
-* [x] Price History Viewer
-* [x] API Error Handling
-* [x] Modular Project Structure
-
-### Next
-
-* [ ] Price Analytics (Highest / Lowest / Average Price)
-* [ ] Buy / Wait Recommendation System
-* [ ] Review-Based Recommendations
-* [ ] Product Comparison System
-
-### Future Vision
-
-* [ ] Price Comparison Engine
-* [ ] Review Scraping & Analysis
-* [ ] FastAPI Backend
-* [ ] PostgreSQL Migration
-* [ ] User Accounts
-* [ ] Authentication System
-* [ ] Web Dashboard
-* [ ] Full-Stack Web Application
+| Column | Type |
+|----------|----------|
+| id | INTEGER |
+| product_name | TEXT |
+| date | TEXT |
+| time | TEXT |
 
 ---
 
-## Current Version
+## price_history
 
-**v0.3** — SQLite-powered shopping assistant featuring product search, favorites management, search history tracking, product scoring, recommendation verdicts, and price history tracking.
+Stores product price records.
+
+| Column | Type |
+|----------|----------|
+| id | INTEGER |
+| product_name | TEXT |
+| price | REAL |
+| date | TEXT |
+| time | TEXT |
 
 ---
 
-## How to Run
 
-### 1. Clone the Repository
+# ShopWise Score System
+
+Products are evaluated using:
+
+- Rating
+- Stock Availability
+
+### Verdict Rules
+
+| Score | Verdict |
+|---------|---------|
+| 8+ | Excellent Choice |
+| 6+ | Recommended |
+| 4+ | Average |
+| Below 4 | Not Recommended |
+
+---
+
+# Roadmap
+
+## Completed ✅
+
+- [x] Product Search
+- [x] Product Details View
+- [x] API Integration
+- [x] Favorites System
+- [x] Favorites Persistence (SQLite)
+- [x] Delete Favorite Product
+- [x] Search History Tracking
+- [x] Search History Persistence (SQLite)
+- [x] Delete Search History
+- [x] Clear Search History
+- [x] ShopWise Product Score
+- [x] Recommendation Verdict System
+- [x] Price Tracking
+- [x] Price History Viewer
+- [x] Price Analytics
+- [x] API Error Handling
+- [x] Modular Architecture
+
+## In Progress 🚧
+
+- [ ] Buy / Wait Recommendation System
+
+## Planned 📌
+
+- [ ] Product Comparison System
+- [ ] Review-Based Recommendations
+- [ ] Price Trend Analysis
+- [ ] Export Reports
+
+## Future Vision 🚀
+
+- [ ] FastAPI Backend
+- [ ] PostgreSQL Migration
+- [ ] Authentication System
+- [ ] User Accounts
+- [ ] Web Dashboard
+- [ ] Full-Stack Web Application
+
+---
+
+# Installation
+
+## Clone Repository
 
 ```bash
 git clone <repository-url>
 cd ShopWise
 ```
 
-### 2. Create a Virtual Environment
+## Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-### 3. Activate the Virtual Environment
+# Current Version
 
-Windows:
+## v0.4
 
-```bash
-.venv\Scripts\activate
-```
+Features Included:
 
-### 4. Install Dependencies
-
-```bash
-pip install requests
-```
-
-### 5. Run the Application
-
-```bash
-python main.py
-```
+- Product Search
+- Favorites Management
+- Search History Management
+- Product Scoring
+- Recommendation Verdicts
+- Price Tracking
+- Price History Viewer
+- Price Analytics
 
 ---
 
-## Learning Journey
+# Learning Journey
 
-This project is being developed incrementally to learn:
+ShopWise is being built incrementally to practice real-world software development.
 
-* Python Fundamentals
-* APIs and HTTP Requests
-* SQLite and SQL
-* Database Design
-* Software Architecture
-* Recommendation Systems
-* Backend Development with FastAPI
-* PostgreSQL
-* Full-Stack Development
+Progression:
+
+Python Fundamentals
+→ APIs & HTTP
+→ SQLite
+→ Analytics
+→ Recommendation Systems
+→ FastAPI
+→ PostgreSQL
+→ Full-Stack Development
