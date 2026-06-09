@@ -9,7 +9,8 @@ from database import (create_tables,
                     delete_search_history,
                     clear_search_history,
                     add_price_record,
-                    get_price_history
+                    get_price_history,
+                    get_product_prices
                         )
 from datetime import datetime
 
@@ -313,6 +314,35 @@ def remove_all_search_history():
 
     pause()
 
+def analyze_prices(product_name):
+
+    prices =  get_product_prices(product_name)
+
+    if not prices:
+        print("No price history found.")
+        pause()
+        return
+    
+    price_list = []
+
+    for price in prices:
+        price_list.append(price[0])
+
+    highest_price = max(price_list)
+    lowest_price = min(price_list)
+    average_price = sum(price_list) / len(price_list)
+
+    print("\nPRICE ANALYSIS")
+    print("-" * 50)
+
+    print(f"Highest Price : {highest_price}")    
+    print(f"Lowest Price : {lowest_price}")    
+    print(f"Average Price : {round(average_price,2)}")    
+
+    print("-" * 50)
+
+    pause()
+
 def menu():
     print("1. Search Product ")
     print("2. View History ")
@@ -321,19 +351,20 @@ def menu():
     print("5. Remove Search History ")
     print("6. Remove all Search History ")
     print("7. View Price History")
-    print("8. Exit ")
+    print("8. Analyze Product Prices")
+    print("9. Exit ")
 
 create_tables()
 
 while True:
-
+    
     print ( '-' * 35 )
     print("Welcome to ShopWise!")
     print ( '-' * 35 )
 
     menu()
     
-    choice = input("Enter your Choice (1-7) : ")
+    choice = input("Enter your Choice (1-9) : ")
     
     match choice :
         
@@ -358,7 +389,12 @@ while True:
         case "7":
             view_price_history()    
             
-        case "8" :
+        case "8":
+         product_name = input("Enter Product Name: ").strip()
+
+         analyze_prices(product_name)
+   
+        case "9" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       

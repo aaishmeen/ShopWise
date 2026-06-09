@@ -163,3 +163,20 @@ def get_price_history():
 
     return history    
 
+
+def get_product_prices(product_name):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT price
+    FROM price_history
+    WHERE product_name = ?
+    """, (product_name,))
+
+    prices = cursor.fetchall()
+
+    conn.close()
+
+    return prices
