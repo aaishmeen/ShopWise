@@ -141,7 +141,7 @@ def search_product():
 
     add_search_history( product_name, date,time)
 
-    print("Search saved successfully!")
+    print("Price and Search history saved successfully!")
     pause()
 
 
