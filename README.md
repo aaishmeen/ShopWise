@@ -93,34 +93,32 @@ Search products and view:
 
 ## Roadmap
 
-### Completed
+### Completed ✅
 
-[x] Product Search
-[x] Favorites System
-[x] Search History System
-[x] SQLite Integration
-[x] Product Scoring System
-[x] Recommendation Verdicts
-[x] Price Tracking
-[x] Price History Viewer
-[x] Price Analytics
-[x] Buy / Wait Recommendations
-[x] Analytics Service Refactor
+* [x] Product Search
+* [x] Favorites System
+* [x] Search History System
+* [x] SQLite Integration
+* [x] Product Scoring System
+* [x] Recommendation Verdicts
+* [x] Price Tracking
+* [x] Price History Viewer
+* [x] Price Analytics
+* [x] Buy / Wait Recommendations
+* [x] Analytics Service Refactor
 
-### Next
+### Next 🚧
 
-[] Favorite Service Refactor
-[] History Service Refactor
-[] Product Comparison System
-[] Price Trend Analysis
+* [ ] Favorite Service Refactor
+* [ ] History Service Refactor
+* [ ] Product Comparison System
+* [ ] Price Trend Analysis
 
-### Future
+### Future 🚀
 
-[] PostgreSQL Migration
-[] FastAPI Backend
-[] Authentication System
-[] REST API
-[] Web Dashboard
-[] Full-Stack Application
-
----
+* [ ] PostgreSQL Migration
+* [ ] FastAPI Backend
+* [ ] Authentication System
+* [ ] REST API
+* [ ] Web Dashboard
+* [ ] Full-Stack Application
