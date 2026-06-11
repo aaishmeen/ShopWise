@@ -1,6 +1,12 @@
 import sqlite3
+import os
 
-DB_NAME="shopwise.db"
+BASE_DIR = os.path.dirname(__file__)
+
+DATA_DIR = os.path.join(BASE_DIR, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+DB_NAME = os.path.join(DATA_DIR, "shopwise.db")
 
 def get_connection():
     return sqlite3.connect(DB_NAME)
