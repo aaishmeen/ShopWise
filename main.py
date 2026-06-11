@@ -332,16 +332,73 @@ def analyze_prices(product_name):
     lowest_price = min(price_list)
     average_price = sum(price_list) / len(price_list)
 
+    current_price = price_list[-1]
+
+    if current_price < average_price:
+        recommendation = "BUY NOW 🔥"
+
+    elif current_price > average_price:
+        recommendation = "WAIT ⏳"
+
+    else:
+        recommendation = "FAIR PRICE 👍"
+
     print("\nPRICE ANALYSIS")
     print("-" * 50)
 
     print(f"Highest Price : {highest_price}")    
     print(f"Lowest Price : {lowest_price}")    
-    print(f"Average Price : {round(average_price,2)}")    
+    print(f"Average Price : {round(average_price,2)}") 
+    print()
+    print(f"Current Price : {current_price}")
+    print(f"Recommendation: {recommendation}")   
 
     print("-" * 50)
 
     pause()
+
+def analyze_product_prices():
+
+    history = get_price_history()
+
+    if not history:
+        print("No price history found.")
+        pause()
+        return
+    
+    product_names = []
+
+    for record in history:
+
+        if record[1] not in product_names:
+            product_names.append(record[1])
+
+    print("\nTRACKED PRODUCTS")
+    print("-" * 50)
+
+    for index, product in enumerate(product_names, start=1):
+        print(f"{index}. {product}")
+
+    print("-" * 50) 
+
+    try:
+        selection = int(
+            input("Select Product Number: ")
+        )
+
+    except ValueError:
+        print("Invalid input.")
+        pause()
+        return       
+    
+    if selection < 1 or selection > len(product_names):
+        print("Invalid product number.")
+        pause()
+        return
+    
+    selected_product = product_names[selection - 1]
+
+    analyze_prices(selected_product)
 
 def menu():
     print("1. Search Product ")
@@ -390,9 +447,7 @@ while True:
             view_price_history()    
             
         case "8":
-         product_name = input("Enter Product Name: ").strip()
-
-         analyze_prices(product_name)
+            analyze_product_prices()
    
         case "9" :
             print("Exiting Now !")

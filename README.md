@@ -164,14 +164,14 @@ Products are evaluated using:
 - [x] Price Analytics
 - [x] API Error Handling
 - [x] Modular Architecture
+- [x] Buy / Wait Recommendation System
 
 ## In Progress 🚧
 
-- [ ] Buy / Wait Recommendation System
+- [ ] Product Comparison System
 
 ## Planned 📌
 
-- [ ] Product Comparison System
 - [ ] Review-Based Recommendations
 - [ ] Price Trend Analysis
 - [ ] Export Reports
