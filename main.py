@@ -1,22 +1,31 @@
 from utils import pause
 from api_handler import get_products
+
 from services.analytics_service import (
-                        calculate_score,
-                        get_verdict,
-                        analyze_prices,
-                        analyze_product_prices
-                    )
-from database import (create_tables,
-                    add_favorite,
-                    get_favorites,
-                    delete_favorite,
-                    add_search_history,
-                    get_search_history,
-                    delete_search_history,
-                    clear_search_history,
-                    add_price_record,
-                    get_price_history
-                        )
+    calculate_score,
+    get_verdict,
+    analyze_product_prices,
+    view_price_history
+)
+
+from services.favorite_service import (
+    view_favorites,
+    remove_favorite
+)
+
+from services.history_service import (
+    view_history,
+    remove_search_history,
+    remove_all_search_history
+)
+
+from database import (
+    create_tables,
+    add_favorite,
+    add_search_history,
+    add_price_record
+)
+
 from datetime import datetime
 
 
@@ -119,175 +128,6 @@ def search_product():
     print("Price and Search history saved successfully!")
     pause()
 
-
-def view_history():
-
-    history = get_search_history()
-
-    if not history :
-        print("No Search history Found !")
-        pause()
-        return
-
-       
-    print('-' * 65)
-    print(f"{'No.':<5} {'Product Name':<25} {'Date':<15} {'Time':<10}")
-    print('-' * 65)
-
-    for search in history:
-
-        print(
-            f"{search[0]:<5}"
-            f"{search[1]:<25}"
-            f"{search[2]:<15}"
-            f"{search[3]:<10}"
-        )
-        
-    print("-" * 65)    
-    pause()
-
-def view_favorites():
-   
-    favorites= get_favorites()
-    if not favorites:
-        print("No favorites found.")
-        pause()
-        return
-
-    print("-" * 50)
-
-    for favorite in favorites:
-
-        print(f"{favorite[0]}. {favorite[1]}")
-        print(f"   Category : {favorite[2]}")
-        print(f"   Price    : ${favorite[3]}")
-        print("-" * 50)
-        print("-" * 50)
-
-    pause()
-
-def view_price_history():
-
-    history = get_price_history()
-
-    if not history:
-        print("No price history found.")
-        pause()
-        return    
-
-    print("-" * 75) 
-    print(
-         f"{'ID':<5}"
-        f"{'Product Name':<25}"
-        f"{'Price':<10}"
-        f"{'Date':<15}"
-        f"{'Time':<10}"
-    )      
-    print("-" * 75)
-
-    for record in history:
-
-        print(
-            f"{record[0]:<5}"
-            f"{record[1]:<25}"
-            f"${record[2]:<9}"
-            f"{record[3]:<15}"
-            f"{record[4]:<10}"
-        )
-
-    print("-" * 75)
-
-    pause()
-
-
-def remove_favorite():
-
-    favorites = get_favorites()
-
-    if not favorites:
-        print("No favorites found.")
-        pause()
-        return
-
-    print("-" * 50)
-
-    for favorite in favorites:
-
-        print(f"{favorite[0]}. {favorite[1]}")
-        print(f"   Category : {favorite[2]}")
-        print(f"   Price    : ${favorite[3]}")
-        print("-" * 50)
-
-    try:
-        favorite_id = int(
-            input("Enter favorite ID to delete: ")
-        )
-
-    except ValueError:
-        print("Invalid input.")
-        pause()
-        return
-
-    delete_favorite(favorite_id)
-
-    print("Favorite deleted successfully!")
-
-    pause()
-    
-def remove_search_history():
-
-    history = get_search_history()
-
-    if not history:
-        print("No Search History Found!")
-        pause()
-        return
-
-    print("-" * 70)
-
-    for search in history:
-        print(f"{search[0]}. {search[1]}")
-
-    print("-" * 70)
-
-    try:
-        history_id = int(
-            input("Enter Search History ID to delete: ")
-        )
-
-    except ValueError:
-        print("Invalid Input")
-        pause()
-        return
-
-    delete_search_history(history_id)
-
-    print("Search History Deleted Successfully!")
-
-    pause()
-
-
-def remove_all_search_history():
-
-    history = get_search_history()
-
-    if not history:
-        print("No Search History Found!")
-        pause()
-        return
-
-    confirm_del = input("Are you sure you want to clear all search history? (y/n): ").lower()
-
-    if confirm_del == "y":
-
-        clear_search_history()
-
-        print("Search History Cleared Successfully!")
-
-    else:
-        print("Operation Cancelled!")
-
-    pause()
 
 def menu():
     print("1. Search Product ")

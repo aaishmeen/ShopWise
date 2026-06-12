@@ -119,3 +119,37 @@ def analyze_product_prices():
     selected_product = product_names[selection - 1]
 
     analyze_prices(selected_product)
+
+def view_price_history():
+
+    history = get_price_history()
+
+    if not history:
+        print("No price history found.")
+        pause()
+        return    
+
+    print("-" * 75) 
+    print(
+         f"{'ID':<5}"
+        f"{'Product Name':<25}"
+        f"{'Price':<10}"
+        f"{'Date':<15}"
+        f"{'Time':<10}"
+    )      
+    print("-" * 75)
+
+    for record in history:
+
+        print(
+            f"{record[0]:<5}"
+            f"{record[1]:<25}"
+            f"${record[2]:<9}"
+            f"{record[3]:<15}"
+            f"{record[4]:<10}"
+        )
+
+    print("-" * 75)
+
+    pause()
+
