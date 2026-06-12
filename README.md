@@ -1,29 +1,69 @@
 # ShopWise
 
-ShopWise is a Python CLI shopping assistant that helps users search products, manage favorites, track search history, monitor product prices, and analyze buying decisions using historical data.
+ShopWise is a Python CLI shopping assistant that helps users search products, manage favorites, track search history, monitor product prices, analyze pricing trends, and compare products to make smarter buying decisions.
+
+---
 
 ## Features
 
-- Search products using the DummyJSON API
-- View detailed product information
-- Save and manage favorite products
-- Track search history
-- Track product prices automatically
-- View price history
-- Analyze historical pricing data
-- Generate ShopWise product scores
-- Receive product recommendations
-- Get Buy / Wait suggestions based on price trends
+### Product Search
+
+* Search products using the DummyJSON API
+* View detailed product information
+* Display product rating, stock, category, price, and description
+
+### Product Insights
+
+* ShopWise Product Score
+* Product Recommendation Verdicts
+* Buy / Wait Recommendations
+
+### Favorites Management
+
+* Save products to favorites
+* View saved favorites
+* Remove favorite products
+
+### Search History
+
+* Automatically save searches
+* View search history
+* Delete individual search records
+* Clear all search history
+
+### Price Tracking
+
+* Automatically track viewed product prices
+* Store historical price data in SQLite
+
+### Price Analytics
+
+* Highest recorded price
+* Lowest recorded price
+* Average recorded price
+* Buy / Wait recommendation based on historical pricing
+
+### Product Comparison
+
+Compare two products side-by-side using:
+
+* Price
+* Rating
+* Stock
+* ShopWise Score
+
+The system automatically selects a winner based on the calculated score.
 
 ---
 
 ## Tech Stack
 
-- Python
-- SQLite
-- Requests
-- DummyJSON API
-- Git & GitHub
+* Python
+* SQLite
+* Requests
+* DummyJSON API
+* Git
+* GitHub
 
 ---
 
@@ -34,11 +74,16 @@ ShopWise/
 │
 ├── data/
 │   └── shopwise.db
+│
 ├── services/
-│   └── analytics_service.py
-├── main.py
-├── database.py
+│   ├── analytics_service.py
+│   ├── comparison_service.py
+│   ├── favorite_service.py
+│   └── history_service.py
+│
 ├── api_handler.py
+├── database.py
+├── main.py
 ├── utils.py
 ├── README.md
 └── .gitignore
@@ -46,48 +91,9 @@ ShopWise/
 
 ---
 
-## Current Features
-
-### Product Search
-Search products and view:
-
-- Title
-- Category
-- Price
-- Rating
-- Stock
-- Description
-
-### Favorites
-- Save products
-- View favorites
-- Remove favorites
-
-### Search History
-- Save searches
-- View history
-- Delete records
-- Clear all history
-
-### Price Tracking
-- Automatically store viewed product prices
-- Maintain historical price records
-
-### Price Analytics
-- Highest recorded price
-- Lowest recorded price
-- Average recorded price
-
-### Product Insights
-- ShopWise Score
-- Recommendation Verdict
-- Buy / Wait Recommendation
-
----
-
 ## Current Version
 
-**v0.5**
+### v0.6
 
 ---
 
@@ -96,23 +102,26 @@ Search products and view:
 ### Completed ✅
 
 * [x] Product Search
+* [x] Product Details View
 * [x] Favorites System
 * [x] Search History System
 * [x] SQLite Integration
 * [x] Product Scoring System
-* [x] Recommendation Verdicts
+* [x] Recommendation Verdict System
 * [x] Price Tracking
 * [x] Price History Viewer
 * [x] Price Analytics
 * [x] Buy / Wait Recommendations
+* [x] Product Comparison System
 * [x] Analytics Service Refactor
+* [x] Favorites Service Refactor
+* [x] History Service Refactor
 
 ### Next 🚧
 
-* [ ] Favorite Service Refactor
-* [ ] History Service Refactor
-* [ ] Product Comparison System
 * [ ] Price Trend Analysis
+* [ ] Export Reports
+* [ ] Advanced Recommendation Engine
 
 ### Future 🚀
 
@@ -122,3 +131,5 @@ Search products and view:
 * [ ] REST API
 * [ ] Web Dashboard
 * [ ] Full-Stack Application
+
+---

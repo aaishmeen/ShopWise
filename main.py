@@ -6,25 +6,30 @@ from services.analytics_service import (
     get_verdict,
     analyze_product_prices,
     view_price_history
-)
+    )
 
 from services.favorite_service import (
     view_favorites,
     remove_favorite
-)
+    )
 
 from services.history_service import (
     view_history,
     remove_search_history,
     remove_all_search_history
-)
+    )
+
+
+from services.comparison_service import (
+    compare_products
+    )
 
 from database import (
     create_tables,
     add_favorite,
     add_search_history,
     add_price_record
-)
+    )
 
 from datetime import datetime
 
@@ -58,6 +63,14 @@ def search_product():
         print(f"   Price : ${product['price']}")
         print("-" * 50)
 
+    action = input("\n1. View Product Details \n "
+                   "2. Compare Products \n"
+                   "Choose Option: ")
+    
+    if action == "2":
+        compare_products(products)
+        return
+    
     try : 
         selection = int(input("Select a product number for detailed information : "))    
   

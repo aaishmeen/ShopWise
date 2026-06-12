@@ -20,7 +20,6 @@ def view_favorites():
         print(f"   Category : {favorite[2]}")
         print(f"   Price    : ${favorite[3]}")
         print("-" * 50)
-        print("-" * 50)
 
     pause()
 
