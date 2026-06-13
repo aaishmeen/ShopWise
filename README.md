@@ -1,6 +1,12 @@
 # ShopWise
 
-ShopWise is a Python CLI shopping assistant that helps users search products, manage favorites, track search history, monitor product prices, analyze pricing trends, and compare products to make smarter buying decisions.
+ShopWise is a Python CLI shopping assistant that helps users search products, manage favorites, track search history, monitor price changes, analyze pricing trends, compare products, and make smarter buying decisions using historical data.
+
+---
+
+## Current Version
+
+### v0.7
 
 ---
 
@@ -10,38 +16,61 @@ ShopWise is a Python CLI shopping assistant that helps users search products, ma
 
 * Search products using the DummyJSON API
 * View detailed product information
-* Display product rating, stock, category, price, and description
+* Display:
+
+  * Title
+  * Category
+  * Price
+  * Rating
+  * Stock
+  * Description
 
 ### Product Insights
 
 * ShopWise Product Score
-* Product Recommendation Verdicts
+* Recommendation Verdict System
 * Buy / Wait Recommendations
 
 ### Favorites Management
 
 * Save products to favorites
-* View saved favorites
-* Remove favorite products
+* View favorite products
+* Remove favorites
 
 ### Search History
 
 * Automatically save searches
 * View search history
-* Delete individual search records
+* Delete search records
 * Clear all search history
 
 ### Price Tracking
 
-* Automatically track viewed product prices
-* Store historical price data in SQLite
+* Automatically store viewed product prices
+* Save historical pricing data
+
+### Price History Viewer
+
+* View all tracked product prices
+* Display date and time of each record
 
 ### Price Analytics
 
-* Highest recorded price
-* Lowest recorded price
-* Average recorded price
-* Buy / Wait recommendation based on historical pricing
+Analyze historical pricing data:
+
+* Highest Price
+* Lowest Price
+* Average Price
+
+### Price Trend Analysis
+
+Analyze price movement over time:
+
+* Increasing Trend 📈
+* Decreasing Trend 📉
+* Stable Trend ➖
+
+Provides recommendations based on observed trends.
 
 ### Product Comparison
 
@@ -52,7 +81,7 @@ Compare two products side-by-side using:
 * Stock
 * ShopWise Score
 
-The system automatically selects a winner based on the calculated score.
+Automatically determines the winning product.
 
 ---
 
@@ -79,7 +108,8 @@ ShopWise/
 │   ├── analytics_service.py
 │   ├── comparison_service.py
 │   ├── favorite_service.py
-│   └── history_service.py
+│   ├── history_service.py
+│   └── trend_service.py
 │
 ├── api_handler.py
 ├── database.py
@@ -88,12 +118,6 @@ ShopWise/
 ├── README.md
 └── .gitignore
 ```
-
----
-
-## Current Version
-
-### v0.6
 
 ---
 
@@ -113,15 +137,16 @@ ShopWise/
 * [x] Price Analytics
 * [x] Buy / Wait Recommendations
 * [x] Product Comparison System
+* [x] Price Trend Analysis
 * [x] Analytics Service Refactor
 * [x] Favorites Service Refactor
 * [x] History Service Refactor
 
 ### Next 🚧
 
-* [ ] Price Trend Analysis
 * [ ] Export Reports
 * [ ] Advanced Recommendation Engine
+* [ ] Improved Product Comparison
 
 ### Future 🚀
 
@@ -130,6 +155,6 @@ ShopWise/
 * [ ] Authentication System
 * [ ] REST API
 * [ ] Web Dashboard
-* [ ] Full-Stack Application
+* [ ] Full-Stack Web Application
 
 ---

@@ -1,6 +1,10 @@
 from utils import pause
 from api_handler import get_products
 
+from services.trend_service import (
+    analyze_product_trend
+)
+
 from services.analytics_service import (
     calculate_score,
     get_verdict,
@@ -64,7 +68,7 @@ def search_product():
         print("-" * 50)
 
     action = input("\n1. View Product Details \n "
-                   "2. Compare Products \n"
+                   "\n2. Compare Products \n"
                    "Choose Option: ")
     
     if action == "2":
@@ -151,7 +155,8 @@ def menu():
     print("6. Remove all Search History ")
     print("7. View Price History")
     print("8. Analyze Product Prices")
-    print("9. Exit ")
+    print("9. Analyze Price Trend")
+    print("10. Exit ")
 
 create_tables()
 
@@ -190,8 +195,11 @@ while True:
             
         case "8":
             analyze_product_prices()
+
+        case "9":
+            analyze_product_trend()    
    
-        case "9" :
+        case "10" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       
