@@ -118,3 +118,53 @@ def clear_search_history():
     conn.commit()
     cursor.close()
     conn.close()
+
+def add_price_record(product_name,price):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""INSERT INTO price_history
+        (product_name, price)
+        VALUES (%s, %s)
+        """,
+        (product_name, price)
+    )
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_price_history():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM price_history""")
+
+    history = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return history
+
+def get_product_prices(product_name):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""SELECT price
+        FROM price_history
+        WHERE product_name = %s""",
+        (product_name,)
+    )
+
+    prices = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return prices
