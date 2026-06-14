@@ -9,3 +9,112 @@ def get_connection():
         password="aaishxxpostgres"
     )
 
+def add_favorite(title, category, price):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO favorites
+        (title, category, price)
+        VALUES (%s, %s, %s)
+        """,
+        (title, category, price)
+    )
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+def get_favorites():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT *
+    FROM favorites
+    """)
+
+    favorites = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return favorites
+
+def delete_favorite(favorite_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM favorites
+        WHERE id = %s
+        """,
+        (favorite_id,)
+    )
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+def add_search_history(product_name,search_date,search_time):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""INSERT INTO search_history
+                   (product_name , search_date,search_time)
+                   VALUES(%s, %s, %s)""",
+                   (product_name,search_date,search_time))    
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def get_search_history():
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        SELECT* 
+        FROM search_history""")
+
+        history = cursor.fetchall()
+
+        cursor.close() 
+        conn.close()   
+
+        return history
+
+def delete_search_history(history_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""DELETE FROM search_history
+            WHERE id = %s""",
+            (history_id,)
+        )    
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def clear_search_history():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""DELETE FROM search_history""")
+
+
+    conn.commit()
+    cursor.close()
+    conn.close()
