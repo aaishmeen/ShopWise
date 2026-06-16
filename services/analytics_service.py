@@ -141,8 +141,8 @@ def view_price_history():
 
     for record in history:
 
-        date = record[3].strftime("%Y-%m-%d")
-        time = record[4].strftime("%H:%M:%S")
+        date = str(record[3])
+        time = str(record[4])
 
         print(
             f"{record[0]:<5}"
