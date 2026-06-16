@@ -70,9 +70,12 @@ ShopWise/
 ├── services/
 │   ├── analytics_service.py
 │   ├── comparison_service.py
+│   ├── export_service.py
 │   ├── favorite_service.py
 │   ├── history_service.py
 │   └── trend_service.py
+│
+├── exports/
 │
 ├── api_handler.py
 ├── database.py
@@ -80,11 +83,11 @@ ShopWise/
 ├── utils.py
 │
 ├── .env
+├── .env.example
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
-
----
 
 ## Installation
 
@@ -116,7 +119,7 @@ source .venv/bin/activate
 ### Install Dependencies
 
 ```bash
-pip install requests psycopg python-dotenv
+pip install -r requirements.txt
 ```
 
 ### Configure Environment Variables
@@ -166,10 +169,10 @@ python main.py
 * Trend Analysis
 * Product Comparison Engine
 * Recommendation System
+* CSV Export Functionality
 
 ### Planned
 
-* Export Reports (CSV/PDF)
 * Advanced Recommendation Engine
 * FastAPI Backend
 * REST API

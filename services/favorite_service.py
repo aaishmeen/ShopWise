@@ -51,8 +51,10 @@ def remove_favorite():
         pause()
         return
 
-    delete_favorite(favorite_id)
+    deleted = delete_favorite(favorite_id)
 
-    print("Favorite deleted successfully!")
-
+    if deleted:
+        print("Favorite deleted successfully!")
+    else:
+        print("Favorite ID not found.")
     pause()    

@@ -53,160 +53,281 @@ def get_connection():
 
 def add_favorite(title, category, price):
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
 
-    cursor.execute(
-        """
-        INSERT INTO favorites
-        (title, category, price)
-        VALUES (%s, %s, %s)
-        """,
-        (title, category, price)
-    )
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    conn.commit()
+        cursor.execute("""
+            INSERT INTO favorites
+            (title, category, price)
+            VALUES (%s, %s, %s)""",
+            (title, category, price)
+        )
 
-    cursor.close()
-    conn.close()
+        conn.commit()
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
 
 def get_favorites():
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn=None
+    cursor = None
 
-    cursor.execute("""
-    SELECT *
-    FROM favorites
-    """)
-
-    favorites = cursor.fetchall()
-
-    cursor.close()
-    conn.close()
-
-    return favorites
-
-def delete_favorite(favorite_id):
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
-        DELETE FROM favorites
-        WHERE id = %s
-        """,
-        (favorite_id,)
-    )
-
-    conn.commit()
-
-    cursor.close()
-    conn.close()
-
-def add_search_history(product_name,search_date,search_time):
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""INSERT INTO search_history
-                   (product_name , search_date,search_time)
-                   VALUES(%s, %s, %s)""",
-                   (product_name,search_date,search_time))    
-    
-    conn.commit()
-    cursor.close()
-    conn.close()
-
-def get_search_history():
+    try:
 
         conn = get_connection()
         cursor = conn.cursor()
 
         cursor.execute("""
-        SELECT* 
-        FROM search_history""")
+        SELECT *
+        FROM favorites""")
 
-        history = cursor.fetchall()
+        return cursor.fetchall()
+    
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return []
 
-        cursor.close() 
-        conn.close()   
+    finally:
+        if cursor:
+            cursor.close()
 
-        return history
+        if conn:
+            conn.close()
+
+    
+
+def delete_favorite(favorite_id):
+
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            DELETE FROM favorites
+            WHERE id = %s""",
+            (favorite_id,)
+        )
+
+        deleted_rows = cursor.rowcount
+
+        conn.commit()
+
+        return deleted_rows
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
+
+def add_search_history(product_name, search_date, search_time):
+
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """INSERT INTO search_history
+            (product_name, search_date, search_time)
+            VALUES (%s, %s, %s)""",
+            (product_name, search_date, search_time)
+        )
+
+        conn.commit()
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
+
+def get_search_history():
+
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM search_history""")
+
+        return cursor.fetchall()
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
 
 def delete_search_history(history_id):
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
 
-    cursor.execute("""DELETE FROM search_history
-            WHERE id = %s""",
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""DELETE FROM search_history
+            WHERE id = %s """,
             (history_id,)
-        )    
+        )
 
-    conn.commit()
-    cursor.close()
-    conn.close()
+        deleted_rows = cursor.rowcount
+
+        conn.commit()
+
+        return deleted_rows
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
 
 def clear_search_history():
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
 
-    cursor.execute("""DELETE FROM search_history""")
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
+        cursor.execute("""
+            DELETE FROM search_history""")
 
-    conn.commit()
-    cursor.close()
-    conn.close()
+        conn.commit()
 
-def add_price_record(product_name,price):
+    except Exception as e:
+        print(f"Database Error: {e}")
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    finally:
+        if cursor:
+            cursor.close()
 
-    cursor.execute("""INSERT INTO price_history
-        (product_name, price)
-        VALUES (%s, %s)
-        """,
-        (product_name, price)
-    )
-
-    conn.commit()
-    cursor.close()
-    conn.close()
+        if conn:
+            conn.close()
 
 def get_price_history():
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
 
-    cursor.execute("""
-        SELECT *
-        FROM price_history""")
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    history = cursor.fetchall()
+        cursor.execute("""
+            SELECT *
+            FROM price_history""")
 
-    cursor.close()
-    conn.close()
+        return cursor.fetchall()
 
-    return history
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
 
 def get_product_prices(product_name):
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
 
-    cursor.execute("""SELECT price
-        FROM price_history
-        WHERE product_name = %s""",
-        (product_name,)
-    )
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    prices = cursor.fetchall()
+        cursor.execute("""
+            SELECT price
+            FROM price_history
+            WHERE product_name = %s""",
+            (product_name,)
+        )
 
-    cursor.close()
-    conn.close()
+        return cursor.fetchall()
 
-    return prices
+    except Exception as e:
+        print(f"Database Error: {e}")
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
+
+def add_price_record(product_name, price):
+
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            INSERT INTO price_history
+            (product_name, price)
+            VALUES (%s, %s)""",
+            (product_name, price)
+        )
+
+        conn.commit()
+
+    except Exception as e:
+        print(f"Database Error: {e}")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()

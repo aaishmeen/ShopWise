@@ -61,9 +61,12 @@ def remove_search_history():
         pause()
         return
 
-    delete_search_history(history_id)
+    deleted = delete_search_history(history_id)
 
-    print("Search History Deleted Successfully!")
+    if deleted:
+        print("Search History Deleted Successfully!")
+    else:
+        print("Search History ID not found.")
 
     pause()
 
