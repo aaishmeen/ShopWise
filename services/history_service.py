@@ -21,8 +21,8 @@ def view_history():
 
     for search in history :
 
-        date = search[2].strftime("%Y-%m-%d")
-        time = search[3].strftime("%H:%M:%S")
+        date = str(search[2])
+        time = str(search[3])
 
         print(
             f"{search[0]:<5}"

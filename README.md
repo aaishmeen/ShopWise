@@ -1,98 +1,64 @@
 # ShopWise
 
-ShopWise is a Python CLI shopping assistant that helps users search products, manage favorites, track search history, monitor price changes, analyze pricing trends, compare products, and make smarter buying decisions using historical data.
+A Python-powered CLI shopping assistant that helps users search products, compare alternatives, track prices, manage favorites, and make data-driven purchasing decisions using PostgreSQL-backed historical analysis.
 
 ---
 
-## Current Version
+## Overview
 
-### v0.7
+ShopWise was built to explore real-world software engineering concepts including:
+
+* API Integration
+* PostgreSQL Database Management
+* Modular Software Architecture
+* Data Analysis
+* User Input Validation
+* Environment-Based Configuration
+
+The application fetches live product data, stores user activity, tracks price history, and provides analytical insights to support smarter buying decisions.
 
 ---
 
 ## Features
 
-### Product Search
+### Product Discovery
 
 * Search products using the DummyJSON API
 * View detailed product information
-* Display:
+* Browse ratings, stock levels, pricing, and descriptions
 
-  * Title
-  * Category
-  * Price
-  * Rating
-  * Stock
-  * Description
+### Product Evaluation
 
-### Product Insights
+* ShopWise Scoring System
+* Recommendation Verdict Engine
+* Product Comparison Tool
 
-* ShopWise Product Score
-* Recommendation Verdict System
-* Buy / Wait Recommendations
+### Data Persistence
 
-### Favorites Management
+* Save favorite products
+* Store search history
+* Track product prices over time
 
-* Save products to favorites
-* View favorite products
-* Remove favorites
+### Analytics
 
-### Search History
-
-* Automatically save searches
-* View search history
-* Delete search records
-* Clear all search history
-
-### Price Tracking
-
-* Automatically store viewed product prices
-* Save historical pricing data
-
-### Price History Viewer
-
-* View all tracked product prices
-* Display date and time of each record
-
-### Price Analytics
-
-Analyze historical pricing data:
-
-* Highest Price
-* Lowest Price
-* Average Price
-
-### Price Trend Analysis
-
-Analyze price movement over time:
-
-* Increasing Trend 📈
-* Decreasing Trend 📉
-* Stable Trend ➖
-
-Provides recommendations based on observed trends.
-
-### Product Comparison
-
-Compare two products side-by-side using:
-
-* Price
-* Rating
-* Stock
-* ShopWise Score
-
-Automatically determines the winning product.
+* Price History Viewer
+* Price Trend Analysis
+* Highest, Lowest, and Average Price Analysis
+* Buy/Wait Recommendations
 
 ---
 
 ## Tech Stack
 
-* Python
-* SQLite
-* Requests
-* DummyJSON API
-* Git
-* GitHub
+| Category        | Technology    |
+| --------------- | ------------- |
+| Language        | Python        |
+| Database        | PostgreSQL    |
+| API             | DummyJSON     |
+| Database Driver | Psycopg       |
+| HTTP Requests   | Requests      |
+| Configuration   | Python Dotenv |
+| Version Control | Git & GitHub  |
 
 ---
 
@@ -100,9 +66,6 @@ Automatically determines the winning product.
 
 ```text
 ShopWise/
-│
-├── data/
-│   └── shopwise.db
 │
 ├── services/
 │   ├── analytics_service.py
@@ -115,46 +78,106 @@ ShopWise/
 ├── database.py
 ├── main.py
 ├── utils.py
-├── README.md
-└── .gitignore
+│
+├── .env
+├── .gitignore
+└── README.md
 ```
+
+---
+
+## Installation
+
+### Clone the Repository
+
+```bash
+git clone <repository-url>
+cd ShopWise
+```
+
+### Create and Activate a Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Linux / macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install requests psycopg python-dotenv
+```
+
+### Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+DB_HOST=localhost
+DB_NAME=shopwise
+DB_USER=postgres
+DB_PASSWORD=your_password
+```
+
+### Run the Application
+
+```bash
+python main.py
+```
+
+---
+
+## Skills Demonstrated
+
+* Object-Oriented and Modular Python Development
+* REST API Consumption
+* PostgreSQL Integration
+* SQL Query Design
+* Environment Variable Management
+* Data Processing and Analytics
+* CLI Application Development
+* Error Handling and Input Validation
+* Version Control with Git
 
 ---
 
 ## Roadmap
 
-### Completed ✅
+### Completed
 
-* [x] Product Search
-* [x] Product Details View
-* [x] Favorites System
-* [x] Search History System
-* [x] SQLite Integration
-* [x] Product Scoring System
-* [x] Recommendation Verdict System
-* [x] Price Tracking
-* [x] Price History Viewer
-* [x] Price Analytics
-* [x] Buy / Wait Recommendations
-* [x] Product Comparison System
-* [x] Price Trend Analysis
-* [x] Analytics Service Refactor
-* [x] Favorites Service Refactor
-* [x] History Service Refactor
+* Product Search
+* Product Details Viewer
+* Favorites Management
+* Search History Management
+* PostgreSQL Integration
+* Price Tracking
+* Price Analytics
+* Trend Analysis
+* Product Comparison Engine
+* Recommendation System
 
-### Next 🚧
+### Planned
 
-* [ ] Export Reports
-* [ ] Advanced Recommendation Engine
-* [ ] Improved Product Comparison
-
-### Future 🚀
-
-* [ ] PostgreSQL Migration
-* [ ] FastAPI Backend
-* [ ] Authentication System
-* [ ] REST API
-* [ ] Web Dashboard
-* [ ] Full-Stack Web Application
+* Export Reports (CSV/PDF)
+* Advanced Recommendation Engine
+* FastAPI Backend
+* REST API
+* Authentication System
+* Web Dashboard
 
 ---
+
+## Why This Project?
+
+ShopWise was developed as a hands-on project to strengthen backend development skills by combining APIs, databases, analytics, and software architecture into a practical real-world application.
