@@ -4,6 +4,16 @@ import os
 from database import (get_favorites,get_search_history,get_price_history)
 from utils import pause
 
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
+
+EXPORT_DIR = os.path.join(
+    BASE_DIR,
+    "exports")
+
 def export_favorites():
 
     favorites = get_favorites()
@@ -13,10 +23,10 @@ def export_favorites():
         pause()
         return
     
-    os.makedirs("exports",exist_ok=True)
+    os.makedirs(BASE_DIR,exist_ok=True)
 
     with open(
-        "exports/favorites.csv","w",newline="")as file:
+        os.path.join(EXPORT_DIR, "favorites.csv"),"w",newline="") as file:
 
         writer= csv.writer(file)
 
@@ -27,7 +37,7 @@ def export_favorites():
         for favorite in favorites:
             writer.writerow(favorite)
 
-    print("Favorites exported successfully to exports/favorites.csv")   
+    print("Favorites exported successfully! ")   
         
     pause()
 
@@ -41,10 +51,10 @@ def export_search_history():
         pause()
         return
 
-    os.makedirs("exports" , exist_ok=True)
+    os.makedirs(BASE_DIR, exist_ok=True)
 
-    with open ("exports/search_history.csv","w",newline="")as file:
-
+    with open( os.path.join(EXPORT_DIR, "search_history.csv"), "w",newline="") as file:
+ 
         writer =  csv.writer(file)
 
         writer.writerow(
@@ -68,10 +78,10 @@ def export_price_history():
         pause()
         return
     
-    os.makedirs("exports",exist_ok=True)
+    os.makedirs(BASE_DIR,exist_ok=True)
 
-    with open ("exports/price_history.csv","w",newline="")as file:
-
+    with open(os.path.join(EXPORT_DIR, "price_history.csv"),"w", newline="") as file:
+  
         writer =  csv.writer(file)
 
         writer.writerow(["ID","Product Name","Price","Date","Time"])

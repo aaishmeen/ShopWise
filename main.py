@@ -35,6 +35,12 @@ from database import (
     add_price_record
     )
 
+from services.export_service import (
+    export_favorites,
+    export_search_history,
+    export_price_history
+)
+
 from datetime import datetime
 
 
@@ -149,7 +155,37 @@ def menu():
     print("7. View Price History")
     print("8. Analyze Product Prices")
     print("9. Analyze Price Trend")
-    print("10. Exit ")
+    print("10. Export Data ")
+    print("11. Exit ")
+
+def export_menu():
+
+    print("\nEXPORT DATA")
+    print("-" * 50)
+
+    print("1. Export Favorites")
+    print("2. Export Search History")
+    print("3. Export Price History")    
+
+    choice = input("Choose Export Option (1-3): ")
+
+    match choice :
+
+        case "1":
+            export_favorites()
+
+        case "2":
+            export_search_history()
+
+        case "3":
+            export_price_history()
+
+        case _ :  
+            print("Invalid Choice. ")
+            pause()
+                
+
+
 
 create_tables()
 
@@ -161,7 +197,7 @@ while True:
 
     menu()
     
-    choice = input("Enter your Choice (1-10) : ")
+    choice = input("Enter your Choice (1-11) : ")
     
     match choice :
         
@@ -190,9 +226,12 @@ while True:
             analyze_product_prices()
 
         case "9":
-            analyze_product_trend()    
+            analyze_product_trend() 
+
+        case "10":
+            export_menu()       
    
-        case "10" :
+        case "11" :
             print("Exiting Now !")
             print("Thank you for choosing ShopWise !")
             break       
