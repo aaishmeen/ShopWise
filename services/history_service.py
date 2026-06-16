@@ -19,13 +19,16 @@ def view_history():
     print(f"{'No.':<5} {'Product Name':<25} {'Date':<15} {'Time':<10}")
     print('-' * 65)
 
-    for search in history:
+    for search in history :
+
+        date = search[2].strftime("%Y-%m-%d")
+        time = search[3].strftime("%H:%M:%S")
 
         print(
             f"{search[0]:<5}"
             f"{search[1]:<25}"
-            f"{search[2]:<15}"
-            f"{search[3]:<10}"
+            f"{date:<15}"
+            f"{time:<10}"
         )
         
     print("-" * 65)    

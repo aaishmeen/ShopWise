@@ -127,20 +127,13 @@ def search_product():
 
         print("Product added to favorites.")  
 
+    add_price_record(
+    selected_product["title"],
+    selected_product["price"],)
 
     current_time = datetime.now()
 
-    date = current_time.strftime("%Y-%m-%d")
-    time =  current_time.strftime("%H:%M:%S")
-
-    add_price_record(
-    selected_product["title"],
-    selected_product["price"],
-    date,
-    time
-)
-
-    add_search_history( product_name, date,time)
+    add_search_history(product_name,current_time.date(),current_time.time())
 
     print("Price and Search history saved successfully!")
     pause()
@@ -168,7 +161,7 @@ while True:
 
     menu()
     
-    choice = input("Enter your Choice (1-9) : ")
+    choice = input("Enter your Choice (1-10) : ")
     
     match choice :
         

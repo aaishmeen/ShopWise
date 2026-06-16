@@ -1,15 +1,8 @@
-import sqlite3
 import os
+from dotenv import load_dotenv
+import psycopg
 
-BASE_DIR = os.path.dirname(__file__)
-
-DATA_DIR = os.path.join(BASE_DIR, "data")
-os.makedirs(DATA_DIR, exist_ok=True)
-
-DB_NAME = os.path.join(DATA_DIR, "shopwise.db")
-
-def get_connection():
-    return sqlite3.connect(DB_NAME)
+load_dotenv()
 
 def create_tables():
 
@@ -17,58 +10,79 @@ def create_tables():
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS favorites (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        category TEXT,
-        price REAL
-    )
+        CREATE TABLE IF NOT EXISTS favorites (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            category VARCHAR(100),
+            price NUMERIC(10,2)
+        )
     """)
 
     cursor.execute("""
-CREATE TABLE IF NOT EXISTS search_history(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        product_name TEXT,
-        date TEXT,
-        time TEXT
+        CREATE TABLE IF NOT EXISTS search_history (
+            id SERIAL PRIMARY KEY,
+            product_name VARCHAR(255) NOT NULL,
+            search_date DATE NOT NULL,
+            search_time TIME NOT NULL
         )
-        """)
-    
-    cursor.execute("""CREATE TABLE IF NOT EXISTS price_history(
-                   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   product_name TEXT,
-                   price REAL,
-                   date TEXT,
-                   time TEXT)""")
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS price_history (
+            id SERIAL PRIMARY KEY,
+            product_name VARCHAR(255) NOT NULL,
+            price NUMERIC(10,2) NOT NULL,
+            recorded_date DATE DEFAULT CURRENT_DATE,
+            recorded_time TIME DEFAULT CURRENT_TIME
+        )
+    """)
 
     conn.commit()
+
+    cursor.close()
     conn.close()
+
+def get_connection():
+
+    return psycopg.connect(
+        host=os.getenv("DB_HOST"),
+        dbname=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD")
+    )
 
 def add_favorite(title, category, price):
 
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    INSERT INTO favorites
-    (title, category, price)
-    VALUES (?, ?, ?)
-    """, (title, category, price))
+    cursor.execute(
+        """
+        INSERT INTO favorites
+        (title, category, price)
+        VALUES (%s, %s, %s)
+        """,
+        (title, category, price)
+    )
 
     conn.commit()
+
+    cursor.close()
     conn.close()
 
 def get_favorites():
 
     conn = get_connection()
-    cursor =  conn.cursor()
+    cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT * FROM favorites
+    SELECT *
+    FROM favorites
     """)
 
-    favorites =  cursor.fetchall()
+    favorites = cursor.fetchall()
 
+    cursor.close()
     conn.close()
 
     return favorites
@@ -78,53 +92,61 @@ def delete_favorite(favorite_id):
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    DELETE FROM favorites
-    WHERE id = ?                   
-    """,(favorite_id,))
-    
+    cursor.execute(
+        """
+        DELETE FROM favorites
+        WHERE id = %s
+        """,
+        (favorite_id,)
+    )
+
     conn.commit()
+
+    cursor.close()
     conn.close()
 
-def add_search_history(product_name,date,time):
+def add_search_history(product_name,search_date,search_time):
 
-    conn =  get_connection()
+    conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    INSERT INTO search_history
-    (product_name,date,time)
-    VALUES(?,?,?)
-    """,(product_name,date,time))
-
+    cursor.execute("""INSERT INTO search_history
+                   (product_name , search_date,search_time)
+                   VALUES(%s, %s, %s)""",
+                   (product_name,search_date,search_time))    
+    
     conn.commit()
+    cursor.close()
     conn.close()
-
 
 def get_search_history():
 
-    conn = get_connection()
-    cursor =  conn.cursor()
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    cursor.execute("""
-    SELECT * FROM search_history""")
+        cursor.execute("""
+        SELECT* 
+        FROM search_history""")
 
-    history = cursor.fetchall()
+        history = cursor.fetchall()
 
-    conn.close()
+        cursor.close() 
+        conn.close()   
 
-    return history
+        return history
 
 def delete_search_history(history_id):
 
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    DELETE FROM search_history
-    WHERE id =?""",(history_id,))
+    cursor.execute("""DELETE FROM search_history
+            WHERE id = %s""",
+            (history_id,)
+        )    
 
     conn.commit()
+    cursor.close()
     conn.close()
 
 def clear_search_history():
@@ -132,27 +154,28 @@ def clear_search_history():
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    DELETE FROM search_history
-    """)
+    cursor.execute("""DELETE FROM search_history""")
+
 
     conn.commit()
-    conn.close()    
+    cursor.close()
+    conn.close()
 
-def add_price_record(product_name,price,date,time):
+def add_price_record(product_name,price):
 
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    INSERT INTO price_history
-    (product_name,price,date,time)
-    VALUES(?,?,?,?)"""
-    ,(product_name,price,date,time))
+    cursor.execute("""INSERT INTO price_history
+        (product_name, price)
+        VALUES (%s, %s)
+        """,
+        (product_name, price)
+    )
 
     conn.commit()
-    conn.close()    
-
+    cursor.close()
+    conn.close()
 
 def get_price_history():
 
@@ -160,29 +183,30 @@ def get_price_history():
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT * FROM price_history
-    """)
+        SELECT *
+        FROM price_history""")
 
     history = cursor.fetchall()
 
+    cursor.close()
     conn.close()
 
-    return history    
-
+    return history
 
 def get_product_prices(product_name):
 
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("""
-    SELECT price
-    FROM price_history
-    WHERE product_name = ?
-    """, (product_name,))
+    cursor.execute("""SELECT price
+        FROM price_history
+        WHERE product_name = %s""",
+        (product_name,)
+    )
 
     prices = cursor.fetchall()
 
+    cursor.close()
     conn.close()
 
     return prices

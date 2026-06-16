@@ -25,6 +25,11 @@ def compare_products(products):
         print("Invalid input.")
         pause()
         return
+    
+    if first == second:
+        print("Please select two different products.")
+        pause()
+        return
 
     if (first < 1 
         or first > len(products) 

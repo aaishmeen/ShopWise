@@ -1,9 +1,9 @@
 from utils import pause
-from database import get_product_prices
+
 from database import (
-                    get_product_prices,
-                    get_price_history
-                )
+    get_product_prices,
+    get_price_history
+)
 
 def analyze_price_trend(product_name):
     

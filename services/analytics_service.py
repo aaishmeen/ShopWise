@@ -141,12 +141,15 @@ def view_price_history():
 
     for record in history:
 
+        date = record[3].strftime("%Y-%m-%d")
+        time = record[4].strftime("%H:%M:%S")
+
         print(
             f"{record[0]:<5}"
             f"{record[1]:<25}"
             f"${record[2]:<9}"
-            f"{record[3]:<15}"
-            f"{record[4]:<10}"
+            f"{date:<15}"
+            f"{time:<10}"
         )
 
     print("-" * 75)
