@@ -1,64 +1,36 @@
 # ShopWise
 
-A Python-powered CLI shopping assistant that helps users search products, compare alternatives, track prices, manage favorites, and make data-driven purchasing decisions using PostgreSQL-backed historical analysis.
-
----
-
-## Overview
-
-ShopWise was built to explore real-world software engineering concepts including:
-
-* API Integration
-* PostgreSQL Database Management
-* Modular Software Architecture
-* Data Analysis
-* User Input Validation
-* Environment-Based Configuration
-
-The application fetches live product data, stores user activity, tracks price history, and provides analytical insights to support smarter buying decisions.
+A Python-based product tracking and analysis application that integrates with the DummyJSON API and PostgreSQL to help users search products, track prices, manage favorites, analyze trends, and generate reports.
 
 ---
 
 ## Features
 
-### Product Discovery
-
 * Search products using the DummyJSON API
 * View detailed product information
-* Browse ratings, stock levels, pricing, and descriptions
-
-### Product Evaluation
-
-* ShopWise Scoring System
-* Recommendation Verdict Engine
-* Product Comparison Tool
-
-### Data Persistence
-
-* Save favorite products
-* Store search history
-* Track product prices over time
-
-### Analytics
-
-* Price History Viewer
-* Price Trend Analysis
-* Highest, Lowest, and Average Price Analysis
-* Buy/Wait Recommendations
+* Save products to favorites
+* View and manage favorites
+* Track search history with date and time
+* Track product price history
+* Compare products using a custom ShopWise Score
+* Analyze product pricing and buying recommendations
+* Analyze price trends over time
+* Export favorites, search history, and price history to CSV
+* Generate timestamped PDF reports
+* PostgreSQL database integration
+* Environment variable configuration using `.env`
 
 ---
 
-## Tech Stack
+## Technologies Used
 
-| Category        | Technology    |
-| --------------- | ------------- |
-| Language        | Python        |
-| Database        | PostgreSQL    |
-| API             | DummyJSON     |
-| Database Driver | Psycopg       |
-| HTTP Requests   | Requests      |
-| Configuration   | Python Dotenv |
-| Version Control | Git & GitHub  |
+* Python
+* PostgreSQL
+* Requests
+* Psycopg
+* Python-dotenv
+* ReportLab
+* Git & GitHub
 
 ---
 
@@ -67,64 +39,71 @@ The application fetches live product data, stores user activity, tracks price hi
 ```text
 ShopWise/
 │
+├── data/
+│
+├── exports/      # Generated CSV exports
+├── reports/      # Generated PDF reports
+│
 ├── services/
 │   ├── analytics_service.py
 │   ├── comparison_service.py
 │   ├── export_service.py
 │   ├── favorite_service.py
 │   ├── history_service.py
+│   ├── report_service.py
 │   └── trend_service.py
-│
-├── exports/
-│
-├── api_handler.py
-├── database.py
-├── main.py
-├── utils.py
 │
 ├── .env
 ├── .env.example
 ├── .gitignore
+├── api_handler.py
+├── database.py
+├── main.py
+├── README.md
 ├── requirements.txt
-└── README.md
+└── utils.py
 ```
 
 ## Installation
 
-### Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd ShopWise
 ```
 
-### Create and Activate a Virtual Environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-Windows:
+### 3. Activate the Virtual Environment
+
+#### Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-Linux / macOS:
+#### macOS/Linux
 
 ```bash
 source .venv/bin/activate
 ```
 
-### Install Dependencies
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure Environment Variables
+---
 
-Create a `.env` file:
+## Environment Variables
+
+Create a `.env` file in the project root:
 
 ```env
 DB_HOST=localhost
@@ -133,54 +112,108 @@ DB_USER=postgres
 DB_PASSWORD=your_password
 ```
 
-### Run the Application
+---
 
-```bash
-python main.py
+## CSV Export Functionality
+
+ShopWise can export:
+
+* Favorites
+* Search History
+* Price History
+
+Generated CSV files are stored in the:
+
+```text
+exports/
+```
+
+directory.
+
+---
+
+## PDF Report Generation
+
+ShopWise can generate timestamped PDF reports containing:
+
+* Total Favorites
+* Total Searches
+* Total Price Records
+* Highest Recorded Price
+* Lowest Recorded Price
+* Average Recorded Price
+* Report Generation Timestamp
+
+Generated reports are stored in the:
+
+```text
+reports/
+```
+
+directory.
+
+---
+
+## Sample Report Contents
+
+```text
+SHOPWISE REPORT
+
+Generated On: 18-Jun-2026 12:30:00
+
+SUMMARY
+
+Total Favorites: 10
+Total Searches: 25
+Total Price Records: 15
+
+ANALYTICS SUMMARY
+
+Highest Recorded Price: $1099.99
+Lowest Recorded Price: $199.99
+Average Recorded Price: $799.99
 ```
 
 ---
 
-## Skills Demonstrated
+## Dependencies
 
-* Object-Oriented and Modular Python Development
-* REST API Consumption
-* PostgreSQL Integration
-* SQL Query Design
+```text
+requests
+psycopg
+python-dotenv
+reportlab
+```
+
+Install all dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Future Improvements
+
+* FastAPI integration
+* Interactive web dashboard
+* Data visualization charts
+* Unit testing
+* User authentication
+* Email report delivery
+* Scheduled report generation
+
+---
+
+## Author
+
+Developed as a Python portfolio project demonstrating:
+
+* API Integration
+* PostgreSQL Database Management
+* Data Analysis
+* File Exporting
+* PDF Report Generation
 * Environment Variable Management
-* Data Processing and Analytics
-* CLI Application Development
-* Error Handling and Input Validation
-* Version Control with Git
-
----
-
-## Roadmap
-
-### Completed
-
-* Product Search
-* Product Details Viewer
-* Favorites Management
-* Search History Management
-* PostgreSQL Integration
-* Price Tracking
-* Price Analytics
-* Trend Analysis
-* Product Comparison Engine
-* Recommendation System
-* CSV Export Functionality
-
-### Planned
-
-* Advanced Recommendation Engine
-* FastAPI Backend
-* REST API
-* Authentication System
-* Web Dashboard
-
----
-
-## Why This Project?
-
-ShopWise was developed as a hands-on project to strengthen backend development skills by combining APIs, databases, analytics, and software architecture into a practical real-world application.
+* Modular Software Design
+* Error Handling and Validation

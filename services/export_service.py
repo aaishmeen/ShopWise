@@ -23,7 +23,7 @@ def export_favorites():
         pause()
         return
     
-    os.makedirs(BASE_DIR,exist_ok=True)
+    os.makedirs(EXPORT_DIR,exist_ok=True)
 
     with open(
         os.path.join(EXPORT_DIR, "favorites.csv"),"w",newline="") as file:
@@ -51,7 +51,7 @@ def export_search_history():
         pause()
         return
 
-    os.makedirs(BASE_DIR, exist_ok=True)
+    os.makedirs(EXPORT_DIR, exist_ok=True)
 
     with open( os.path.join(EXPORT_DIR, "search_history.csv"), "w",newline="") as file:
  
@@ -78,7 +78,7 @@ def export_price_history():
         pause()
         return
     
-    os.makedirs(BASE_DIR,exist_ok=True)
+    os.makedirs(EXPORT_DIR,exist_ok=True)
 
     with open(os.path.join(EXPORT_DIR, "price_history.csv"),"w", newline="") as file:
   
