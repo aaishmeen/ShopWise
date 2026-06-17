@@ -32,17 +32,21 @@ ShopWise allows users to search products, track price history, manage favorites,
 
 ### Product Search
 
-![Product Search](assets/product_search.png)
+![Product Search](assets/search_product.png)
 
-### Product Detail View
+### Product Details
 
-![Product Detail View](assets/product_detail_view.png)
+![Product Details](assets/product_details.png)
 
-### CSV Export
+### Product Analysis
 
-![CSV Export](assets/csv_export.png)
+![Product Analysis](assets/product_analyses.png)
 
-### PDF Report Generation
+### Export Data
+
+![Export Data](assets/export%20data.png)
+
+### PDF Report
 
 ![PDF Report](assets/pdf_report.png)
 
@@ -66,11 +70,12 @@ ShopWise allows users to search products, track price history, manage favorites,
 ShopWise/
 │
 ├── assets/
+│   ├── export_data.png
 │   ├── main_menu.png
-│   ├── product_search.png
-│   ├── product_detail_view.png
-│   ├── csv_export.png
-│   └── pdf_report.png
+│   ├── pdf_report.png
+│   ├── product_analyses.png
+│   ├── product_details.png
+│   └── search_product.png
 │
 ├── data/
 │
