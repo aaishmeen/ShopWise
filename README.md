@@ -73,7 +73,7 @@ ShopWise/
 │   ├── export_data.png
 │   ├── main_menu.png
 │   ├── pdf_report.png
-│   ├── product_analyses.png
+│   ├── product_analysis.png
 │   ├── product_details.png
 │   └── search_product.png
 │
