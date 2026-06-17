@@ -66,9 +66,9 @@ def analyze_prices(product_name):
     print("\nPRICE ANALYSIS")
     print("-" * 50)
 
-    print(f"Highest Price : {highest_price}")    
-    print(f"Lowest Price : {lowest_price}")    
-    print(f"Average Price : {round(average_price,2)}") 
+    print(f"Highest Price : ${highest_price}")    
+    print(f"Lowest Price : ${lowest_price}")    
+    print(f"Average Price : ${round(average_price,2)}") 
     print()
     print(f"Current Price : {current_price}")
     print(f"Recommendation: {recommendation}")   

@@ -28,6 +28,8 @@ from services.comparison_service import (
     compare_products
     )
 
+from services.report_service import(generate_report)
+
 from database import (
     create_tables,
     add_favorite,
@@ -156,7 +158,8 @@ def menu():
     print("8. Analyze Product Prices")
     print("9. Analyze Price Trend")
     print("10. Export Data ")
-    print("11. Exit ")
+    print("11. Generate PDF report")
+    print("12. Exit ")
 
 def export_menu():
 
@@ -197,7 +200,7 @@ while True:
 
     menu()
     
-    choice = input("Enter your Choice (1-11) : ")
+    choice = input("Enter your Choice (1-12) : ")
     
     match choice :
         
@@ -231,9 +234,12 @@ while True:
         case "10":
             export_menu()       
    
-        case "11" :
+        case "11":
+             generate_report()
+
+        case "12" :
             print("Exiting Now !")
-            print("Thank you for choosing ShopWise !")
+            print("Thank you for Choosing ShopWise !")
             break       
 
         case _:

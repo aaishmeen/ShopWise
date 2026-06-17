@@ -115,4 +115,3 @@ def generate_report():
     print( f"Report generated successfully: {pdf_file}")
     pause()
 
-generate_report()    

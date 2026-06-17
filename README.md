@@ -1,6 +1,8 @@
 # ShopWise
 
-A Python-based product tracking and analysis application that integrates with the DummyJSON API and PostgreSQL to help users search products, track prices, manage favorites, analyze trends, and generate reports.
+A Python-based product tracking and analytics application that integrates with the DummyJSON API and PostgreSQL.
+
+ShopWise allows users to search products, track price history, manage favorites, analyze pricing trends, export data to CSV, and generate professional PDF reports. The project is designed using a modular service-based architecture and demonstrates API integration, database management, data analysis, and file generation in Python.
 
 ---
 
@@ -22,6 +24,30 @@ A Python-based product tracking and analysis application that integrates with th
 
 ---
 
+## Screenshots
+
+### Main Menu
+
+![Main Menu](assets/main_menu.png)
+
+### Product Search
+
+![Product Search](assets/product_search.png)
+
+### Product Detail View
+
+![Product Detail View](assets/product_detail_view.png)
+
+### CSV Export
+
+![CSV Export](assets/csv_export.png)
+
+### PDF Report Generation
+
+![PDF Report](assets/pdf_report.png)
+
+---
+
 ## Technologies Used
 
 * Python
@@ -38,6 +64,13 @@ A Python-based product tracking and analysis application that integrates with th
 
 ```text
 ShopWise/
+│
+├── assets/
+│   ├── main_menu.png
+│   ├── product_search.png
+│   ├── product_detail_view.png
+│   ├── csv_export.png
+│   └── pdf_report.png
 │
 ├── data/
 │
@@ -64,6 +97,8 @@ ShopWise/
 └── utils.py
 ```
 
+---
+
 ## Installation
 
 ### 1. Clone the Repository
@@ -81,13 +116,13 @@ python -m venv .venv
 
 ### 3. Activate the Virtual Environment
 
-#### Windows
+**Windows**
 
 ```bash
 .venv\Scripts\activate
 ```
 
-#### macOS/Linux
+**macOS/Linux**
 
 ```bash
 source .venv/bin/activate
@@ -114,21 +149,35 @@ DB_PASSWORD=your_password
 
 ---
 
+## Database Setup
+
+Create a PostgreSQL database named:
+
+```text
+shopwise
+```
+
+The required tables will be created automatically when the application starts.
+
+---
+
+## Running the Application
+
+```bash
+python main.py
+```
+
+---
+
 ## CSV Export Functionality
 
-ShopWise can export:
+ShopWise can export the following data:
 
 * Favorites
 * Search History
 * Price History
 
-Generated CSV files are stored in the:
-
-```text
-exports/
-```
-
-directory.
+Generated CSV files are stored in the `exports/` directory.
 
 ---
 
@@ -144,13 +193,7 @@ ShopWise can generate timestamped PDF reports containing:
 * Average Recorded Price
 * Report Generation Timestamp
 
-Generated reports are stored in the:
-
-```text
-reports/
-```
-
-directory.
+Generated reports are stored in the `reports/` directory.
 
 ---
 
@@ -176,20 +219,19 @@ Average Recorded Price: $799.99
 
 ---
 
-## Dependencies
+## Key Learning Outcomes
 
-```text
-requests
-psycopg
-python-dotenv
-reportlab
-```
+This project demonstrates:
 
-Install all dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
+* REST API Integration
+* PostgreSQL Database Operations
+* Environment Variable Management
+* Modular Software Architecture
+* Data Analysis and Trend Evaluation
+* CSV File Generation
+* PDF Report Generation
+* Error Handling and Input Validation
+* Git and GitHub Workflow
 
 ---
 
@@ -198,22 +240,13 @@ pip install -r requirements.txt
 * FastAPI integration
 * Interactive web dashboard
 * Data visualization charts
-* Unit testing
+* Unit testing with Pytest
 * User authentication
-* Email report delivery
 * Scheduled report generation
+* Email report delivery
 
 ---
 
 ## Author
 
-Developed as a Python portfolio project demonstrating:
-
-* API Integration
-* PostgreSQL Database Management
-* Data Analysis
-* File Exporting
-* PDF Report Generation
-* Environment Variable Management
-* Modular Software Design
-* Error Handling and Validation
+Built as a portfolio project to strengthen practical skills in Python development, database management, API integration, and software design.

@@ -48,8 +48,8 @@ def analyze_price_trend(product_name):
     print("\nPRICE TREND ANALYSIS")
     print("-" * 50)
 
-    print(f"First Price  : {first_price}")
-    print(f"Latest Price : {latest_price}")
+    print(f"First Price  : ${first_price}")
+    print(f"Latest Price : ${latest_price}")
 
     print()
     print(f"Trend        : {trend}")
